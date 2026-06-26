@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SafeRoad Libya – منصة مراقبة الطرق</title>
-  <meta name="description" content="منصة ذكية لمراقبة الطرق وحالة المرور في ليبيا" />
+  <title>الطرق – SafeRoad Libya</title>
   <style>
 /* =============================================
    SafeRoad Libya - style.css
@@ -1477,33 +1476,48 @@ textarea.form-control { resize: vertical; min-height: 120px; }
 }
 
 </style>
+  <style>
+    /* خريطة SVG تفاعلية */
+    .map-svg { width:100%; height:420px; }
+    .road-line { stroke-width:3; fill:none; stroke-linecap:round; cursor:pointer; transition:stroke-width 0.2s; }
+    .road-line:hover { stroke-width:5; }
+    .road-line.safe    { stroke:#00e676; }
+    .road-line.warning { stroke:#ffd740; stroke-dasharray:10 5; }
+    .road-line.danger  { stroke:#ff4b4b; }
+    .road-line.closed  { stroke:#9e9e9e; stroke-dasharray:6 4; }
+    .city-dot { fill:#1a2540; stroke:2px; cursor:pointer; }
+    .city-dot circle { transition:r 0.2s; }
+    .city-dot:hover circle { r:8; }
+    .city-label { fill:#e8eaf6; font-family:'Cairo',sans-serif; font-size:11px; font-weight:600; }
+    .map-bg { fill:#0d1520; }
+    .map-grid { stroke:rgba(255,255,255,0.04); stroke-width:1; }
+    .road-tooltip {
+      position:absolute; background:var(--bg-card);
+      border:1px solid var(--border-green); border-radius:8px;
+      padding:8px 14px; font-size:0.82rem; color:var(--text-primary);
+      pointer-events:none; display:none; z-index:10; white-space:nowrap;
+      font-family:'Cairo',sans-serif;
+    }
+    .map-container { position:relative; }
+  </style>
 </head>
 <body>
 
-  <!-- ===== NAVBAR ===== -->
-  <nav class="navbar" id="navbar">
-    <a href="index.html" class="nav-logo">
-      <div class="logo-icon">🛣</div>
-      Safe<span>Road</span> Libya
-    </a>
-
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <a href="index.html" class="nav-logo"><div class="logo-icon">🛣</div>Safe<span>Road</span> Libya</a>
     <ul class="nav-links">
-      <li><a href="index.html" class="active">الرئيسية</a></li>
-      <li><a href="roads.html">الطرق</a></li>
+      <li><a href="index.html">الرئيسية</a></li>
+      <li><a href="roads.html" class="active">الطرق</a></li>
       <li><a href="reports.html">البلاغات</a></li>
       <li><a href="dashboard.html">لوحة التحكم</a></li>
       <li><a href="contact.html">تواصل معنا</a></li>
     </ul>
-
     <div class="nav-actions">
       <a href="login.html" class="btn-nav-login">تسجيل الدخول</a>
-      <button class="hamburger" aria-label="القائمة">
-        <span></span><span></span><span></span>
-      </button>
+      <button class="hamburger"><span></span><span></span><span></span></button>
     </div>
   </nav>
-
-  <!-- Mobile Menu -->
   <div class="mobile-menu">
     <a href="index.html">🏠 الرئيسية</a>
     <a href="roads.html">🛣 الطرق</a>
@@ -1513,336 +1527,341 @@ textarea.form-control { resize: vertical; min-height: 120px; }
     <a href="login.html">🔐 تسجيل الدخول</a>
   </div>
 
-  <!-- ===== HERO ===== -->
-  <section class="hero">
-    <div class="hero-bg"></div>
-    <div class="hero-grid-lines"></div>
-
-    <div class="hero-content">
-      <div class="hero-badge">
-        <div class="dot"></div>
-        منصة مراقبة الطرق الأولى في ليبيا
-      </div>
-
-      <h1>
-        سافر بأمان مع<br/>
-        <span class="highlight">SafeRoad Libya</span>
-      </h1>
-
-      <p>
-        منصة ذكية لمراقبة حالة الطرق والمرور في ليبيا بشكل لحظي.
-        تعرف على الطرق الآمنة، الحوادث، الازدحام، والطرق المغلقة قبل السفر.
-      </p>
-
-      <div class="hero-actions">
-        <a href="roads.html" class="btn-primary">🔍 تحقق من حالة الطريق</a>
-        <a href="reports.html" class="btn-secondary">📋 عرض البلاغات</a>
-      </div>
-
-      <div class="hero-stats">
-        <div class="hero-stat">
-          <div class="num">48+</div>
-          <div class="lbl">طريق مراقَب</div>
-        </div>
-        <div class="hero-stat">
-          <div class="num">1,240</div>
-          <div class="lbl">مستخدم نشط</div>
-        </div>
-        <div class="hero-stat">
-          <div class="num">320</div>
-          <div class="lbl">بلاغ هذا الشهر</div>
-        </div>
-      </div>
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="page-header-content">
+      <div class="section-label">🛣 خريطة الطرق</div>
+      <h1>حالة الطرق <span style="color:var(--green-main)">التفاعلية</span></h1>
+      <p class="text-muted">تصور تفاعلي لحالة الطرق الرئيسية في ليبيا – محدَّث لحظياً</p>
     </div>
+  </div>
 
-    <!-- بطاقات عائمة -->
-    <div class="hero-visual">
-      <div class="float-card">
-        <div class="icon" style="background:rgba(0,230,118,0.12);color:#00e676">✅</div>
-        <div class="info">
-          <div class="title">طرابلس ← مصراتة</div>
-          <div class="value" style="color:#00e676">آمن</div>
-        </div>
-      </div>
-      <div class="float-card">
-        <div class="icon" style="background:rgba(255,75,75,0.12);color:#ff4b4b">🚨</div>
-        <div class="info">
-          <div class="title">بنغازي ← البيضاء</div>
-          <div class="value" style="color:#ff4b4b">حادث مروري</div>
-        </div>
-      </div>
-      <div class="float-card">
-        <div class="icon" style="background:rgba(255,215,64,0.12);color:#ffd740">⚠️</div>
-        <div class="info">
-          <div class="title">طرابلس ← الزاوية</div>
-          <div class="value" style="color:#ffd740">ازدحام</div>
-        </div>
-      </div>
-    </div>
-  </section>
+  <!-- MAP -->
+  <div style="padding:2rem 2.5rem 0">
+    <div class="map-container">
+      <div class="road-tooltip" id="roadTooltip"></div>
+      <svg class="map-svg" viewBox="0 0 900 420" xmlns="http://www.w3.org/2000/svg">
+        <!-- خلفية الخريطة -->
+        <rect width="900" height="420" class="map-bg" rx="14"/>
 
-  <!-- ===== SEARCH ===== -->
-  <div class="search-section">
-    <div class="search-box animate-in">
-      <h3>🔍 ابحث عن حالة طريقك</h3>
-      <div class="search-row">
-        <div class="form-group" style="margin:0">
-          <select class="form-control" id="from-city-main">
-            <option value="" disabled selected>📍 مدينة الانطلاق</option>
-            <option>طرابلس</option>
-            <option>بنغازي</option>
-            <option>مصراتة</option>
-            <option>سرت</option>
-            <option>الزاوية</option>
-            <option>البيضاء</option>
-            <option>سبها</option>
-            <option>الكفرة</option>
-            <option>ترهونة</option>
-            <option>غريان</option>
-          </select>
-        </div>
-        <div class="form-group" style="margin:0">
-          <select class="form-control" id="to-city-main">
-            <option value="" disabled selected>🎯 الوجهة</option>
-            <option>طرابلس</option>
-            <option>بنغازي</option>
-            <option>مصراتة</option>
-            <option>سرت</option>
-            <option>الزاوية</option>
-            <option>البيضاء</option>
-            <option>سبها</option>
-            <option>الكفرة</option>
-            <option>ترهونة</option>
-            <option>غريان</option>
-          </select>
-        </div>
-        <a href="roads.html" class="btn-primary">🔍 بحث</a>
+        <!-- شبكة خلفية -->
+        <g class="map-grid">
+          <line x1="0" y1="70" x2="900" y2="70"/>
+          <line x1="0" y1="140" x2="900" y2="140"/>
+          <line x1="0" y1="210" x2="900" y2="210"/>
+          <line x1="0" y1="280" x2="900" y2="280"/>
+          <line x1="0" y1="350" x2="900" y2="350"/>
+          <line x1="150" y1="0" x2="150" y2="420"/>
+          <line x1="300" y1="0" x2="300" y2="420"/>
+          <line x1="450" y1="0" x2="450" y2="420"/>
+          <line x1="600" y1="0" x2="600" y2="420"/>
+          <line x1="750" y1="0" x2="750" y2="420"/>
+        </g>
+
+        <!-- البحر الأبيض المتوسط -->
+        <text x="450" y="30" text-anchor="middle" fill="rgba(100,150,200,0.5)" font-size="12" font-family="Cairo,sans-serif">البحر الأبيض المتوسط</text>
+        <line x1="0" y1="45" x2="900" y2="45" stroke="rgba(100,150,200,0.15)" stroke-width="30"/>
+
+        <!-- طرق رئيسية -->
+        <!-- الطريق الساحلي الغربي - أخضر/آمن -->
+        <path d="M 80 90 Q 180 85 260 88 Q 340 90 380 92"
+              class="road-line safe"
+              data-name="الطريق الساحلي الغربي"
+              data-status="آمن 🟢"
+              data-cities="زوارة ← صبراتة ← الزاوية ← طرابلس"
+              data-dist="140 كم"/>
+
+        <!-- طرابلس ← مصراتة ← سرت - أصفر ازدحام -->
+        <path d="M 380 92 Q 450 88 520 90 Q 580 92 620 88"
+              class="road-line warning"
+              data-name="طريق مصراتة – سرت"
+              data-status="ازدحام ⚠️"
+              data-cities="طرابلس ← مصراتة ← سرت"
+              data-dist="400 كم"/>
+
+        <!-- سرت ← بنغازي - أخضر -->
+        <path d="M 620 88 Q 700 85 770 90 Q 820 92 860 90"
+              class="road-line safe"
+              data-name="طريق سرت – بنغازي"
+              data-status="آمن 🟢"
+              data-cities="سرت ← أجدابيا ← بنغازي"
+              data-dist="340 كم"/>
+
+        <!-- بنغازي ← البيضاء - أحمر حادث -->
+        <path d="M 860 90 Q 880 140 875 190 Q 870 230 860 250"
+              class="road-line danger"
+              data-name="طريق بنغازي – البيضاء"
+              data-status="حادث مروري 🔴"
+              data-cities="بنغازي ← المرج ← البيضاء"
+              data-dist="220 كم"/>
+
+        <!-- طرابلس ← غريان - أخضر -->
+        <path d="M 380 92 Q 370 150 355 200 Q 340 240 330 270"
+              class="road-line safe"
+              data-name="طريق طرابلس – غريان"
+              data-status="آمن 🟢"
+              data-cities="طرابلس ← ترهونة ← غريان"
+              data-dist="165 كم"/>
+
+        <!-- غريان ← سبها - رمادي مغلق -->
+        <path d="M 330 270 Q 340 310 350 340 Q 360 370 365 395"
+              class="road-line closed"
+              data-name="طريق غريان – سبها"
+              data-status="مغلق جزئياً ⛔"
+              data-cities="غريان ← براك ← سبها"
+              data-dist="680 كم"/>
+
+        <!-- بنغازي ← أجدابيا الجنوب - أخضر -->
+        <path d="M 840 100 Q 830 200 810 290 Q 795 340 780 390"
+              class="road-line safe"
+              data-name="طريق الداخلية الشرقي"
+              data-status="آمن 🟢"
+              data-cities="بنغازي ← أجدابيا ← الكفرة"
+              data-dist="1100 كم"/>
+
+        <!-- مدن - نقاط -->
+        <!-- زوارة -->
+        <g class="city-dot">
+          <circle cx="80" cy="90" r="6" fill="#1a2540" stroke="#00e676" stroke-width="2"/>
+          <text x="80" y="112" text-anchor="middle" class="city-label">زوارة</text>
+        </g>
+        <!-- صبراتة -->
+        <g class="city-dot">
+          <circle cx="200" cy="88" r="6" fill="#1a2540" stroke="#00e676" stroke-width="2"/>
+          <text x="200" y="108" text-anchor="middle" class="city-label">صبراتة</text>
+        </g>
+        <!-- الزاوية -->
+        <g class="city-dot">
+          <circle cx="310" cy="90" r="6" fill="#1a2540" stroke="#00e676" stroke-width="2"/>
+          <text x="310" y="110" text-anchor="middle" class="city-label">الزاوية</text>
+        </g>
+        <!-- طرابلس -->
+        <g class="city-dot">
+          <circle cx="380" cy="92" r="10" fill="#00e676" stroke="#00b248" stroke-width="2" opacity="0.9"/>
+          <text x="380" y="115" text-anchor="middle" class="city-label" style="font-size:13px;fill:#00e676">طرابلس</text>
+        </g>
+        <!-- مصراتة -->
+        <g class="city-dot">
+          <circle cx="500" cy="90" r="7" fill="#1a2540" stroke="#ffd740" stroke-width="2"/>
+          <text x="500" y="110" text-anchor="middle" class="city-label">مصراتة</text>
+        </g>
+        <!-- سرت -->
+        <g class="city-dot">
+          <circle cx="620" cy="88" r="6" fill="#1a2540" stroke="#00e676" stroke-width="2"/>
+          <text x="620" y="108" text-anchor="middle" class="city-label">سرت</text>
+        </g>
+        <!-- بنغازي -->
+        <g class="city-dot">
+          <circle cx="860" cy="90" r="10" fill="#00e676" stroke="#00b248" stroke-width="2" opacity="0.9"/>
+          <text x="860" y="113" text-anchor="middle" class="city-label" style="font-size:13px;fill:#00e676">بنغازي</text>
+        </g>
+        <!-- البيضاء -->
+        <g class="city-dot">
+          <circle cx="860" cy="250" r="6" fill="#1a2540" stroke="#ff4b4b" stroke-width="2"/>
+          <text x="860" y="268" text-anchor="middle" class="city-label">البيضاء</text>
+        </g>
+        <!-- غريان -->
+        <g class="city-dot">
+          <circle cx="330" cy="270" r="6" fill="#1a2540" stroke="#00e676" stroke-width="2"/>
+          <text x="330" y="290" text-anchor="middle" class="city-label">غريان</text>
+        </g>
+        <!-- سبها -->
+        <g class="city-dot">
+          <circle cx="365" cy="395" r="6" fill="#1a2540" stroke="#9e9e9e" stroke-width="2"/>
+          <text x="365" y="415" text-anchor="middle" class="city-label">سبها</text>
+        </g>
+        <!-- الكفرة -->
+        <g class="city-dot">
+          <circle cx="780" cy="390" r="6" fill="#1a2540" stroke="#00e676" stroke-width="2"/>
+          <text x="780" y="410" text-anchor="middle" class="city-label">الكفرة</text>
+        </g>
+
+        <!-- تحديث -->
+        <text x="20" y="410" fill="rgba(255,255,255,0.3)" font-size="10" font-family="Cairo,sans-serif">آخر تحديث: منذ 3 دقائق</text>
+      </svg>
+
+      <!-- مفتاح الألوان -->
+      <div class="map-legend">
+        <div class="legend-item"><div class="legend-line" style="background:#00e676"></div> آمن</div>
+        <div class="legend-item"><div class="legend-line" style="background:#ff4b4b"></div> حادث</div>
+        <div class="legend-item"><div class="legend-line" style="background:#ffd740"></div> ازدحام</div>
+        <div class="legend-item"><div class="legend-line" style="background:#9e9e9e"></div> مغلق</div>
       </div>
     </div>
   </div>
 
-  <!-- ===== STATUS CARDS ===== -->
-  <section class="status-section">
-    <div class="section-label">📊 حالة الطرق الآن</div>
-    <div class="section-title">نظرة عامة على <span>شبكة الطرق</span></div>
-    <p class="section-desc">معلومات محدَّثة لحظياً عن حالة الطرق في كافة أرجاء ليبيا</p>
+  <!-- SEARCH & RESULTS -->
+  <div class="roads-page-layout">
 
-    <div class="status-grid">
+    <!-- لوحة البحث -->
+    <div class="search-panel">
+      <div class="card">
+        <h3 style="font-size:1rem;font-weight:700;margin-bottom:1.2rem">🔍 البحث عن مسار</h3>
 
-      <div class="status-card safe animate-in" onclick="window.location='roads.html'">
-        <div class="sc-icon">✅</div>
-        <div class="sc-num" data-count="31">0</div>
-        <div class="sc-label">طريق آمن</div>
-        <div class="sc-sub">⬆ 4 طرق إضافية هذا الأسبوع</div>
-      </div>
-
-      <div class="status-card warn animate-in" onclick="window.location='roads.html'">
-        <div class="sc-icon">⚠️</div>
-        <div class="sc-num" data-count="8">0</div>
-        <div class="sc-label">ازدحام مروري</div>
-        <div class="sc-sub">🔴 في ساعات الذروة</div>
-      </div>
-
-      <div class="status-card danger animate-in" onclick="window.location='reports.html'">
-        <div class="sc-icon">🚨</div>
-        <div class="sc-num" data-count="3">0</div>
-        <div class="sc-label">حادث مروري</div>
-        <div class="sc-sub">تحديث منذ 12 دقيقة</div>
-      </div>
-
-      <div class="status-card closed animate-in" onclick="window.location='roads.html'">
-        <div class="sc-icon">🚫</div>
-        <div class="sc-num" data-count="6">0</div>
-        <div class="sc-label">طريق مغلق</div>
-        <div class="sc-sub">أعمال صيانة وإنشاء</div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ===== FEATURED ROADS ===== -->
-  <section class="roads-section">
-    <div class="section-label">🛣 الطرق الرئيسية</div>
-    <div class="section-title">أبرز <span>المحاور المرورية</span></div>
-    <p class="section-desc">حالة الطرق الرئيسية المحدَّثة في الوقت الفعلي</p>
-
-    <div class="roads-list">
-
-      <div class="road-item animate-in">
-        <div class="road-num">T1</div>
-        <div class="road-info">
-          <div class="road-name">الطريق الساحلي الغربي</div>
-          <div class="road-cities">طرابلس ← الزاوية ← صبراتة ← زوارة</div>
+        <div class="form-group">
+          <label>📍 مدينة الانطلاق</label>
+          <select class="form-control" id="from-city">
+            <option value="" disabled selected>اختر المدينة</option>
+            <option>طرابلس</option><option>بنغازي</option><option>مصراتة</option>
+            <option>سرت</option><option>الزاوية</option><option>البيضاء</option>
+            <option>سبها</option><option>الكفرة</option><option>ترهونة</option>
+            <option>غريان</option><option>زوارة</option><option>صبراتة</option>
+          </select>
         </div>
-        <div class="road-meta">
-          <span class="road-dist">📏 140 كم</span>
-          <span class="road-time">⏱ 1.5 ساعة</span>
-          <span class="badge badge-safe"><span class="status-dot safe"></span> آمن</span>
+
+        <div style="text-align:center;margin:0.5rem 0;color:var(--text-muted);font-size:1.2rem">⇕</div>
+
+        <div class="form-group">
+          <label>🎯 الوجهة</label>
+          <select class="form-control" id="to-city">
+            <option value="" disabled selected>اختر المدينة</option>
+            <option>طرابلس</option><option>بنغازي</option><option>مصراتة</option>
+            <option>سرت</option><option>الزاوية</option><option>البيضاء</option>
+            <option>سبها</option><option>الكفرة</option><option>ترهونة</option>
+            <option>غريان</option><option>زوارة</option><option>صبراتة</option>
+          </select>
+        </div>
+
+        <button class="btn-primary btn-search-road" style="width:100%;justify-content:center;margin-top:0.5rem">
+          🔍 بحث عن المسار
+        </button>
+      </div>
+
+      <!-- فلتر الحالة -->
+      <div class="card">
+        <h3 style="font-size:0.9rem;font-weight:700;margin-bottom:1rem">🎛 تصفية حسب الحالة</h3>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <label style="display:flex;align-items:center;gap:8px;font-size:0.88rem;color:var(--text-secondary);cursor:pointer">
+            <input type="checkbox" checked style="accent-color:var(--green-main)"> <span style="color:var(--green-main)">●</span> الطرق الآمنة (31)
+          </label>
+          <label style="display:flex;align-items:center;gap:8px;font-size:0.88rem;color:var(--text-secondary);cursor:pointer">
+            <input type="checkbox" checked style="accent-color:#ffd740"> <span style="color:#ffd740">●</span> ازدحام (8)
+          </label>
+          <label style="display:flex;align-items:center;gap:8px;font-size:0.88rem;color:var(--text-secondary);cursor:pointer">
+            <input type="checkbox" checked style="accent-color:#ff4b4b"> <span style="color:#ff4b4b">●</span> حوادث (3)
+          </label>
+          <label style="display:flex;align-items:center;gap:8px;font-size:0.88rem;color:var(--text-secondary);cursor:pointer">
+            <input type="checkbox" checked style="accent-color:#9e9e9e"> <span style="color:#9e9e9e">●</span> مغلقة (6)
+          </label>
         </div>
       </div>
 
-      <div class="road-item animate-in">
-        <div class="road-num">T2</div>
-        <div class="road-info">
-          <div class="road-name">الطريق الساحلي الشرقي</div>
-          <div class="road-cities">طرابلس ← مصراتة ← سرت ← بنغازي</div>
-        </div>
-        <div class="road-meta">
-          <span class="road-dist">📏 1050 كم</span>
-          <span class="road-time">⏱ 11 ساعة</span>
-          <span class="badge badge-warning"><span class="status-dot warning"></span> ازدحام</span>
+      <!-- معلومات سريعة -->
+      <div class="card" style="background:var(--green-subtle);border-color:var(--border-green)">
+        <div style="font-size:0.85rem;color:var(--text-secondary);line-height:1.8">
+          💡 <strong style="color:var(--green-main)">نصيحة:</strong> أفضل وقت للسفر على الطريق الساحلي هو الصباح الباكر بين 6-9 صباحاً.
         </div>
       </div>
-
-      <div class="road-item animate-in">
-        <div class="road-num">B1</div>
-        <div class="road-info">
-          <div class="road-name">طريق بنغازي – البيضاء</div>
-          <div class="road-cities">بنغازي ← المرج ← البيضاء ← شحات</div>
-        </div>
-        <div class="road-meta">
-          <span class="road-dist">📏 220 كم</span>
-          <span class="road-time">⏱ 2.5 ساعة</span>
-          <span class="badge badge-danger"><span class="status-dot danger"></span> حادث</span>
-        </div>
-      </div>
-
-      <div class="road-item animate-in">
-        <div class="road-num">S1</div>
-        <div class="road-info">
-          <div class="road-name">طريق طرابلس – غريان</div>
-          <div class="road-cities">طرابلس ← ترهونة ← بني وليد ← غريان</div>
-        </div>
-        <div class="road-meta">
-          <span class="road-dist">📏 165 كم</span>
-          <span class="road-time">⏱ 2 ساعة</span>
-          <span class="badge badge-safe"><span class="status-dot safe"></span> آمن</span>
-        </div>
-      </div>
-
-      <div class="road-item animate-in">
-        <div class="road-num">D1</div>
-        <div class="road-info">
-          <div class="road-name">الطريق الصحراوي</div>
-          <div class="road-cities">طرابلس ← غريان ← سبها ← الكفرة</div>
-        </div>
-        <div class="road-meta">
-          <span class="road-dist">📏 1800 كم</span>
-          <span class="road-time">⏱ 2 يوم</span>
-          <span class="badge badge-closed"><span class="status-dot closed"></span> مغلق جزئياً</span>
-        </div>
-      </div>
-
     </div>
 
-    <div style="margin-top:1.5rem;text-align:center">
-      <a href="roads.html" class="btn-secondary">عرض جميع الطرق ←</a>
+    <!-- نتائج البحث -->
+    <div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem">
+        <h3 style="font-size:1rem;font-weight:700">🛣 الطرق المتاحة</h3>
+        <span style="font-size:0.82rem;color:var(--text-muted)">آخر تحديث: منذ 3 دقائق</span>
+      </div>
+
+      <div class="search-results" id="searchResults">
+        <!-- النتائج الافتراضية -->
+        <div class="route-result-card animate-in">
+          <div class="route-result-header">
+            <div class="route-cities">طرابلس <span class="arrow">←</span> مصراتة</div>
+            <span class="badge badge-safe"><span class="status-dot safe"></span> آمن</span>
+          </div>
+          <div style="font-size:0.8rem;color:var(--text-muted);margin-top:4px">عبر: الطريق الساحلي</div>
+          <div class="route-meta">
+            <div class="route-meta-item"><span class="rm-label">📏 المسافة</span><span class="rm-value">210 كم</span></div>
+            <div class="route-meta-item"><span class="rm-label">⏱ الوقت</span><span class="rm-value">2.5 ساعة</span></div>
+            <div class="route-meta-item"><span class="rm-label">⛽ الوقود</span><span class="rm-value">~21 لتر</span></div>
+            <div style="margin-right:auto"><button class="btn-outline-green" onclick="showToast('🗺️ جاري تحميل تفاصيل الطريق...','info')">التفاصيل</button></div>
+          </div>
+        </div>
+
+        <div class="route-result-card animate-in">
+          <div class="route-result-header">
+            <div class="route-cities">طرابلس <span class="arrow">←</span> الزاوية</div>
+            <span class="badge badge-warning"><span class="status-dot warning"></span> ازدحام</span>
+          </div>
+          <div style="font-size:0.8rem;color:var(--text-muted);margin-top:4px">عبر: الطريق الدائري</div>
+          <div class="route-meta">
+            <div class="route-meta-item"><span class="rm-label">📏 المسافة</span><span class="rm-value">42 كم</span></div>
+            <div class="route-meta-item"><span class="rm-label">⏱ الوقت</span><span class="rm-value">55 دقيقة</span></div>
+            <div class="route-meta-item"><span class="rm-label">⛽ الوقود</span><span class="rm-value">~5 لترات</span></div>
+            <div style="margin-right:auto"><button class="btn-outline-green" onclick="showToast('🗺️ جاري تحميل تفاصيل الطريق...','info')">التفاصيل</button></div>
+          </div>
+        </div>
+
+        <div class="route-result-card animate-in">
+          <div class="route-result-header">
+            <div class="route-cities">بنغازي <span class="arrow">←</span> البيضاء</div>
+            <span class="badge badge-danger"><span class="status-dot danger"></span> حادث</span>
+          </div>
+          <div style="font-size:0.8rem;color:var(--text-muted);margin-top:4px">عبر: الطريق الجبلي</div>
+          <div class="route-meta">
+            <div class="route-meta-item"><span class="rm-label">📏 المسافة</span><span class="rm-value">220 كم</span></div>
+            <div class="route-meta-item"><span class="rm-label">⏱ الوقت</span><span class="rm-value">3+ ساعات</span></div>
+            <div class="route-meta-item"><span class="rm-label">⛽ الوقود</span><span class="rm-value">~22 لتر</span></div>
+            <div style="margin-right:auto"><button class="btn-outline-green" onclick="showToast('🗺️ تنبيه: يوجد حادث في هذا الطريق!','warning')">التفاصيل</button></div>
+          </div>
+        </div>
+
+        <div class="route-result-card animate-in">
+          <div class="route-result-header">
+            <div class="route-cities">طرابلس <span class="arrow">←</span> غريان</div>
+            <span class="badge badge-safe"><span class="status-dot safe"></span> آمن</span>
+          </div>
+          <div style="font-size:0.8rem;color:var(--text-muted);margin-top:4px">عبر: طريق الجبل</div>
+          <div class="route-meta">
+            <div class="route-meta-item"><span class="rm-label">📏 المسافة</span><span class="rm-value">165 كم</span></div>
+            <div class="route-meta-item"><span class="rm-label">⏱ الوقت</span><span class="rm-value">2 ساعة</span></div>
+            <div class="route-meta-item"><span class="rm-label">⛽ الوقود</span><span class="rm-value">~17 لتر</span></div>
+            <div style="margin-right:auto"><button class="btn-outline-green" onclick="showToast('🗺️ جاري تحميل تفاصيل الطريق...','info')">التفاصيل</button></div>
+          </div>
+        </div>
+
+        <div class="route-result-card animate-in">
+          <div class="route-result-header">
+            <div class="route-cities">غريان <span class="arrow">←</span> سبها</div>
+            <span class="badge badge-closed"><span class="status-dot closed"></span> مغلق جزئياً</span>
+          </div>
+          <div style="font-size:0.8rem;color:var(--text-muted);margin-top:4px">عبر: الطريق الصحراوي</div>
+          <div class="route-meta">
+            <div class="route-meta-item"><span class="rm-label">📏 المسافة</span><span class="rm-value">680 كم</span></div>
+            <div class="route-meta-item"><span class="rm-label">⏱ الوقت</span><span class="rm-value">7 ساعات</span></div>
+            <div class="route-meta-item"><span class="rm-label">⛽ الوقود</span><span class="rm-value">~68 لتر</span></div>
+            <div style="margin-right:auto"><button class="btn-outline-green" onclick="showToast('⛔ هذا الطريق مغلق جزئياً، يرجى الحذر!','warning')">التفاصيل</button></div>
+          </div>
+        </div>
+      </div>
     </div>
-  </section>
+  </div>
 
-  <!-- ===== STATS ===== -->
-  <section class="stats-section">
-    <div class="section-label text-center" style="margin:0 auto 1.5rem">📈 إحصائياتنا</div>
-    <div class="section-title text-center">أرقام <span>تتحدث عن نفسها</span></div>
-
-    <div class="stats-grid" style="margin-top:2.5rem">
-      <div class="stat-item animate-in">
-        <span class="num" data-count="48">0</span>
-        <div class="label">طريق مراقَب</div>
-      </div>
-      <div class="stat-item animate-in">
-        <span class="num" data-count="1240">0</span>
-        <div class="label">مستخدم نشط</div>
-      </div>
-      <div class="stat-item animate-in">
-        <span class="num" data-count="320">0</span>
-        <div class="label">بلاغ هذا الشهر</div>
-      </div>
-      <div class="stat-item animate-in">
-        <span class="num" data-count="98">0</span><span class="unit" style="color:var(--green-main)">%</span>
-        <div class="label">دقة المعلومات</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== HOW IT WORKS ===== -->
-  <section class="section">
-    <div class="section-label">⚙️ كيف يعمل</div>
-    <div class="section-title">بسيط وسريع <span>وموثوق</span></div>
-
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2rem">
-
-      <div class="card animate-in" style="text-align:center;padding:2rem">
-        <div style="font-size:2.5rem;margin-bottom:1rem">🔍</div>
-        <h3 style="margin-bottom:0.5rem;font-size:1.05rem">1. ابحث عن طريقك</h3>
-        <p style="color:var(--text-muted);font-size:0.88rem">أدخل مدينة الانطلاق والوجهة وابحث</p>
-      </div>
-
-      <div class="card animate-in" style="text-align:center;padding:2rem">
-        <div style="font-size:2.5rem;margin-bottom:1rem">📊</div>
-        <h3 style="margin-bottom:0.5rem;font-size:1.05rem">2. اطلع على الحالة</h3>
-        <p style="color:var(--text-muted);font-size:0.88rem">احصل على معلومات لحظية عن الطريق</p>
-      </div>
-
-      <div class="card animate-in" style="text-align:center;padding:2rem">
-        <div style="font-size:2.5rem;margin-bottom:1rem">🛡</div>
-        <h3 style="margin-bottom:0.5rem;font-size:1.05rem">3. سافر بأمان</h3>
-        <p style="color:var(--text-muted);font-size:0.88rem">اتخذ قرارك بثقة وسافر بأمان تام</p>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ===== FOOTER ===== -->
+  <!-- FOOTER -->
   <footer class="footer">
     <div class="footer-grid">
       <div class="footer-brand">
-        <div class="nav-logo">
-          <div class="logo-icon">🛣</div>
-          Safe<span>Road</span> Libya
-        </div>
-        <p>منصة ذكية لمراقبة الطرق وحالة المرور في ليبيا. نساعدك على السفر بأمان وثقة.</p>
-        <div class="social-links" style="margin-top:1rem">
-          <a href="#" class="social-link">𝕏</a>
-          <a href="#" class="social-link">f</a>
-          <a href="#" class="social-link">in</a>
-          <a href="#" class="social-link">📧</a>
-        </div>
+        <div class="nav-logo"><div class="logo-icon">🛣</div>Safe<span>Road</span> Libya</div>
+        <p>منصة ذكية لمراقبة الطرق وحالة المرور في ليبيا.</p>
       </div>
-
-      <div class="footer-col">
-        <h4>الصفحات</h4>
-        <ul>
-          <li><a href="index.html">الرئيسية</a></li>
-          <li><a href="roads.html">الطرق</a></li>
-          <li><a href="reports.html">البلاغات</a></li>
-          <li><a href="dashboard.html">لوحة التحكم</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-col">
-        <h4>خدماتنا</h4>
-        <ul>
-          <li><a href="#">مراقبة الطرق</a></li>
-          <li><a href="#">الإشعارات الفورية</a></li>
-          <li><a href="#">تقارير الحوادث</a></li>
-          <li><a href="#">API للمطورين</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-col">
-        <h4>الدعم</h4>
-        <ul>
-          <li><a href="contact.html">تواصل معنا</a></li>
-          <li><a href="#">الأسئلة الشائعة</a></li>
-          <li><a href="#">سياسة الخصوصية</a></li>
-          <li><a href="#">الشروط والأحكام</a></li>
-        </ul>
-      </div>
+      <div class="footer-col"><h4>الصفحات</h4><ul>
+        <li><a href="index.html">الرئيسية</a></li>
+        <li><a href="roads.html">الطرق</a></li>
+        <li><a href="reports.html">البلاغات</a></li>
+        <li><a href="dashboard.html">لوحة التحكم</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>خدماتنا</h4><ul>
+        <li><a href="#">مراقبة الطرق</a></li>
+        <li><a href="#">الإشعارات</a></li>
+        <li><a href="#">تقارير الحوادث</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>الدعم</h4><ul>
+        <li><a href="contact.html">تواصل معنا</a></li>
+        <li><a href="#">الأسئلة الشائعة</a></li>
+        <li><a href="#">سياسة الخصوصية</a></li>
+      </ul></div>
     </div>
-
     <div class="footer-bottom">
-      <span>© 2025 <span>SafeRoad Libya</span> – جميع الحقوق محفوظة</span>
+      <span>© 2025 <span>SafeRoad Libya</span></span>
       <span>صُنع بـ ❤️ في ليبيا</span>
     </div>
   </footer>
@@ -2298,5 +2317,27 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 </script>
+  <script>
+    // تفاعل الخريطة
+    document.querySelectorAll('.road-line').forEach(line => {
+      const tooltip = document.getElementById('roadTooltip');
+      line.addEventListener('mouseenter', (e) => {
+        tooltip.innerHTML = `
+          <strong>${line.dataset.name}</strong><br>
+          ${line.dataset.cities}<br>
+          📏 ${line.dataset.dist} &nbsp; الحالة: ${line.dataset.status}
+        `;
+        tooltip.style.display = 'block';
+      });
+      line.addEventListener('mousemove', (e) => {
+        const rect = line.closest('.map-container').getBoundingClientRect();
+        tooltip.style.top  = (e.clientY - rect.top - 60) + 'px';
+        tooltip.style.right = (rect.right - e.clientX + 10) + 'px';
+      });
+      line.addEventListener('mouseleave', () => {
+        tooltip.style.display = 'none';
+      });
+    });
+  </script>
 </body>
 </html>

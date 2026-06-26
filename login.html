@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SafeRoad Libya – منصة مراقبة الطرق</title>
-  <meta name="description" content="منصة ذكية لمراقبة الطرق وحالة المرور في ليبيا" />
+  <title>تسجيل الدخول – SafeRoad Libya</title>
   <style>
 /* =============================================
    SafeRoad Libya - style.css
@@ -1477,375 +1476,426 @@ textarea.form-control { resize: vertical; min-height: 120px; }
 }
 
 </style>
+  <style>
+    /* ===== تأثيرات خاصة بصفحة تسجيل الدخول ===== */
+
+    /* جسيمات الخلفية */
+    .particles {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .particle {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: var(--green-main);
+      border-radius: 50%;
+      opacity: 0;
+      animation: particleFloat linear infinite;
+    }
+
+    @keyframes particleFloat {
+      0%   { transform: translateY(100vh) scale(0); opacity: 0; }
+      10%  { opacity: 0.6; }
+      90%  { opacity: 0.3; }
+      100% { transform: translateY(-20px) scale(1); opacity: 0; }
+    }
+
+    /* خطوط متحركة في الخلفية */
+    .moving-lines {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .moving-line {
+      position: absolute;
+      left: 50%;
+      width: 1px;
+      height: 100%;
+      background: linear-gradient(
+        to bottom,
+        transparent,
+        rgba(0, 230, 118, 0.08),
+        rgba(0, 230, 118, 0.15),
+        rgba(0, 230, 118, 0.08),
+        transparent
+      );
+      animation: moveLine 4s ease-in-out infinite;
+    }
+
+    .moving-line:nth-child(1) { left: 20%; animation-delay: 0s; }
+    .moving-line:nth-child(2) { left: 40%; animation-delay: 1s; }
+    .moving-line:nth-child(3) { left: 60%; animation-delay: 2s; }
+    .moving-line:nth-child(4) { left: 80%; animation-delay: 3s; }
+
+    @keyframes moveLine {
+      0%, 100% { opacity: 0; transform: translateY(-100%); }
+      50%       { opacity: 1; transform: translateY(100%); }
+    }
+
+    /* الشكل الدائري خلف البطاقة */
+    .glow-circle {
+      position: fixed;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(
+        circle,
+        rgba(0, 230, 118, 0.06) 0%,
+        transparent 70%
+      );
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 0;
+      animation: glowPulse 4s ease-in-out infinite;
+    }
+
+    @keyframes glowPulse {
+      0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.7; }
+      50%       { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+    }
+
+    /* الشريط العلوي (بدل الـ navbar الكامل) */
+    .login-topbar {
+      position: fixed;
+      top: 0; right: 0; left: 0;
+      z-index: 100;
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* تبديل بين تسجيل الدخول والتسجيل */
+    .auth-tabs {
+      display: flex;
+      background: var(--bg-primary);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      padding: 4px;
+      margin-bottom: 1.8rem;
+    }
+
+    .auth-tab {
+      flex: 1;
+      padding: 9px;
+      border-radius: 50px;
+      border: none;
+      background: none;
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      font-weight: 600;
+      font-family: 'Cairo', sans-serif;
+      cursor: pointer;
+      transition: var(--transition);
+      text-align: center;
+    }
+
+    .auth-tab.active {
+      background: linear-gradient(135deg, var(--green-main), var(--green-dark));
+      color: #0a0e1a;
+    }
+
+    /* حقول الإدخال */
+    .input-with-icon {
+      position: relative;
+    }
+
+    .input-with-icon .input-icon {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1rem;
+      color: var(--text-muted);
+      pointer-events: none;
+    }
+
+    .input-with-icon .form-control {
+      padding-right: 42px;
+    }
+
+    /* مؤشر قوة كلمة المرور */
+    .password-strength {
+      margin-top: 6px;
+    }
+
+    .strength-bar {
+      height: 3px;
+      background: var(--bg-primary);
+      border-radius: 2px;
+      overflow: hidden;
+      margin-bottom: 4px;
+    }
+
+    .strength-fill {
+      height: 100%;
+      border-radius: 2px;
+      transition: width 0.3s ease, background 0.3s ease;
+      width: 0%;
+    }
+
+    .strength-text {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    /* زر Google */
+    .btn-google {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 12px;
+      background: var(--bg-primary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      font-weight: 600;
+      font-family: 'Cairo', sans-serif;
+      cursor: pointer;
+      transition: var(--transition);
+      margin-bottom: 0.8rem;
+    }
+
+    .btn-google:hover {
+      border-color: rgba(255,255,255,0.2);
+      color: var(--text-primary);
+    }
+
+    /* حماية البريد الإلكتروني */
+    .verified-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.72rem;
+      color: var(--green-main);
+      background: var(--green-subtle);
+      padding: 2px 8px;
+      border-radius: 50px;
+      border: 1px solid var(--border-green);
+    }
+
+    /* الحساب الجديد form (مخفي افتراضياً) */
+    #registerForm { display: none; }
+
+    /* animation عند التبديل */
+    .form-slide-in {
+      animation: slideInForm 0.3s ease;
+    }
+
+    @keyframes slideInForm {
+      from { opacity: 0; transform: translateX(20px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+  </style>
 </head>
 <body>
 
-  <!-- ===== NAVBAR ===== -->
-  <nav class="navbar" id="navbar">
-    <a href="index.html" class="nav-logo">
+  <!-- خلفية متحركة -->
+  <div class="particles" id="particles"></div>
+  <div class="moving-lines">
+    <div class="moving-line"></div>
+    <div class="moving-line"></div>
+    <div class="moving-line"></div>
+    <div class="moving-line"></div>
+  </div>
+  <div class="glow-circle"></div>
+
+  <!-- الشريط العلوي -->
+  <div class="login-topbar">
+    <a href="index.html" class="nav-logo" style="font-size:1.2rem">
       <div class="logo-icon">🛣</div>
       Safe<span>Road</span> Libya
     </a>
-
-    <ul class="nav-links">
-      <li><a href="index.html" class="active">الرئيسية</a></li>
-      <li><a href="roads.html">الطرق</a></li>
-      <li><a href="reports.html">البلاغات</a></li>
-      <li><a href="dashboard.html">لوحة التحكم</a></li>
-      <li><a href="contact.html">تواصل معنا</a></li>
-    </ul>
-
-    <div class="nav-actions">
-      <a href="login.html" class="btn-nav-login">تسجيل الدخول</a>
-      <button class="hamburger" aria-label="القائمة">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </nav>
-
-  <!-- Mobile Menu -->
-  <div class="mobile-menu">
-    <a href="index.html">🏠 الرئيسية</a>
-    <a href="roads.html">🛣 الطرق</a>
-    <a href="reports.html">📋 البلاغات</a>
-    <a href="dashboard.html">📊 لوحة التحكم</a>
-    <a href="contact.html">📞 تواصل معنا</a>
-    <a href="login.html">🔐 تسجيل الدخول</a>
+    <a href="index.html" style="font-size:0.85rem;color:var(--text-muted);transition:color 0.2s"
+       onmouseover="this.style.color='var(--green-main)'"
+       onmouseout="this.style.color='var(--text-muted)'">
+      ← العودة للرئيسية
+    </a>
   </div>
 
-  <!-- ===== HERO ===== -->
-  <section class="hero">
-    <div class="hero-bg"></div>
-    <div class="hero-grid-lines"></div>
+  <!-- بطاقة تسجيل الدخول -->
+  <div class="login-page">
+    <div class="login-grid-lines"></div>
 
-    <div class="hero-content">
-      <div class="hero-badge">
-        <div class="dot"></div>
-        منصة مراقبة الطرق الأولى في ليبيا
+    <div class="login-card">
+
+      <!-- الشعار -->
+      <div class="login-logo">
+        <div class="logo-circle">🛣</div>
+        <h2>Safe<span style="color:var(--green-main)">Road</span> Libya</h2>
+        <p>منصة مراقبة الطرق الذكية</p>
       </div>
 
-      <h1>
-        سافر بأمان مع<br/>
-        <span class="highlight">SafeRoad Libya</span>
-      </h1>
-
-      <p>
-        منصة ذكية لمراقبة حالة الطرق والمرور في ليبيا بشكل لحظي.
-        تعرف على الطرق الآمنة، الحوادث، الازدحام، والطرق المغلقة قبل السفر.
-      </p>
-
-      <div class="hero-actions">
-        <a href="roads.html" class="btn-primary">🔍 تحقق من حالة الطريق</a>
-        <a href="reports.html" class="btn-secondary">📋 عرض البلاغات</a>
+      <!-- تبديل Login / Register -->
+      <div class="auth-tabs">
+        <button class="auth-tab active" id="loginTab" onclick="switchTab('login')">تسجيل الدخول</button>
+        <button class="auth-tab" id="registerTab" onclick="switchTab('register')">حساب جديد</button>
       </div>
 
-      <div class="hero-stats">
-        <div class="hero-stat">
-          <div class="num">48+</div>
-          <div class="lbl">طريق مراقَب</div>
+      <!-- ===== نموذج تسجيل الدخول ===== -->
+      <div id="loginForm">
+
+        <!-- تسجيل بـ Google -->
+        <button class="btn-google" onclick="showToast('🔗 جاري الاتصال بـ Google...','info')">
+          <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+          تسجيل الدخول بـ Google
+        </button>
+
+        <div class="login-divider">أو</div>
+
+        <form class="login-form" id="loginFormEl">
+
+          <div class="form-group">
+            <label>البريد الإلكتروني</label>
+            <div class="input-with-icon">
+              <span class="input-icon">📧</span>
+              <input type="email" id="email" class="form-control"
+                     placeholder="example@email.com" autocomplete="email" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>كلمة المرور</label>
+            <div class="input-with-icon" style="position:relative">
+              <span class="input-icon">🔒</span>
+              <input type="password" id="password" class="form-control"
+                     placeholder="••••••••" autocomplete="current-password" required>
+              <button type="button" class="input-toggle" style="left:12px;right:auto">👁</button>
+            </div>
+          </div>
+
+          <div class="remember-row">
+            <label class="checkbox-label">
+              <input type="checkbox" id="remember"> تذكرني
+            </label>
+            <a href="#" style="font-size:0.85rem;color:var(--green-main)" onclick="showToast('📧 سيتم إرسال رابط لاسترداد كلمة المرور','info');return false">
+              نسيت كلمة المرور؟
+            </a>
+          </div>
+
+          <button type="submit" class="btn-primary" style="width:100%;justify-content:center;padding:14px;font-size:1rem">
+            🔐 تسجيل الدخول
+          </button>
+
+        </form>
+
+        <div class="login-footer">
+          ليس لديك حساب؟
+          <a href="#" onclick="switchTab('register');return false">أنشئ حساباً مجانياً</a>
         </div>
-        <div class="hero-stat">
-          <div class="num">1,240</div>
-          <div class="lbl">مستخدم نشط</div>
+
+      </div>
+
+      <!-- ===== نموذج إنشاء حساب ===== -->
+      <div id="registerForm">
+
+        <form id="registerFormEl" onsubmit="handleRegister(event)">
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+            <div class="form-group">
+              <label>الاسم الأول</label>
+              <div class="input-with-icon">
+                <span class="input-icon">👤</span>
+                <input type="text" class="form-control" placeholder="أحمد" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>اسم العائلة</label>
+              <div class="input-with-icon">
+                <span class="input-icon">👤</span>
+                <input type="text" class="form-control" placeholder="محمد" required>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>البريد الإلكتروني</label>
+            <div class="input-with-icon">
+              <span class="input-icon">📧</span>
+              <input type="email" class="form-control"
+                     placeholder="example@email.com" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>
+              كلمة المرور
+              <span style="font-size:0.75rem;color:var(--text-muted);margin-right:8px">(8 أحرف على الأقل)</span>
+            </label>
+            <div class="input-with-icon">
+              <span class="input-icon">🔒</span>
+              <input type="password" id="regPassword" class="form-control"
+                     placeholder="••••••••" oninput="checkPasswordStrength(this.value)" required>
+            </div>
+            <div class="password-strength">
+              <div class="strength-bar"><div class="strength-fill" id="strengthFill"></div></div>
+              <div class="strength-text" id="strengthText">أدخل كلمة مرور قوية</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>المدينة</label>
+            <select class="form-control" required>
+              <option value="" disabled selected>اختر مدينتك</option>
+              <option>طرابلس</option><option>بنغازي</option><option>مصراتة</option>
+              <option>سرت</option><option>الزاوية</option><option>البيضاء</option>
+              <option>سبها</option><option>غريان</option><option>زوارة</option>
+            </select>
+          </div>
+
+          <div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:1.2rem">
+            <input type="checkbox" required style="accent-color:var(--green-main);width:15px;height:15px;margin-top:2px;flex-shrink:0">
+            <span style="font-size:0.82rem;color:var(--text-muted)">
+              أوافق على <a href="#" style="color:var(--green-main)">شروط الاستخدام</a>
+              و<a href="#" style="color:var(--green-main)">سياسة الخصوصية</a>
+            </span>
+          </div>
+
+          <button type="submit" class="btn-primary" style="width:100%;justify-content:center;padding:13px">
+            ✨ إنشاء الحساب مجاناً
+          </button>
+
+        </form>
+
+        <div class="login-footer">
+          لديك حساب بالفعل؟
+          <a href="#" onclick="switchTab('login');return false">سجّل دخولك</a>
         </div>
-        <div class="hero-stat">
-          <div class="num">320</div>
-          <div class="lbl">بلاغ هذا الشهر</div>
-        </div>
+
+      </div>
+
+    </div>
+
+    <!-- مزايا سريعة أسفل البطاقة -->
+    <div style="position:relative;z-index:2;margin-top:1.5rem;display:flex;gap:1.5rem;flex-wrap:wrap;justify-content:center">
+      <div style="display:flex;align-items:center;gap:6px;font-size:0.8rem;color:var(--text-muted)">
+        <span style="color:var(--green-main)">✓</span> مجاني 100%
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;font-size:0.8rem;color:var(--text-muted)">
+        <span style="color:var(--green-main)">✓</span> بيانات محمية
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;font-size:0.8rem;color:var(--text-muted)">
+        <span style="color:var(--green-main)">✓</span> إشعارات فورية
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;font-size:0.8rem;color:var(--text-muted)">
+        <span style="color:var(--green-main)">✓</span> بلا إعلانات
       </div>
     </div>
 
-    <!-- بطاقات عائمة -->
-    <div class="hero-visual">
-      <div class="float-card">
-        <div class="icon" style="background:rgba(0,230,118,0.12);color:#00e676">✅</div>
-        <div class="info">
-          <div class="title">طرابلس ← مصراتة</div>
-          <div class="value" style="color:#00e676">آمن</div>
-        </div>
-      </div>
-      <div class="float-card">
-        <div class="icon" style="background:rgba(255,75,75,0.12);color:#ff4b4b">🚨</div>
-        <div class="info">
-          <div class="title">بنغازي ← البيضاء</div>
-          <div class="value" style="color:#ff4b4b">حادث مروري</div>
-        </div>
-      </div>
-      <div class="float-card">
-        <div class="icon" style="background:rgba(255,215,64,0.12);color:#ffd740">⚠️</div>
-        <div class="info">
-          <div class="title">طرابلس ← الزاوية</div>
-          <div class="value" style="color:#ffd740">ازدحام</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== SEARCH ===== -->
-  <div class="search-section">
-    <div class="search-box animate-in">
-      <h3>🔍 ابحث عن حالة طريقك</h3>
-      <div class="search-row">
-        <div class="form-group" style="margin:0">
-          <select class="form-control" id="from-city-main">
-            <option value="" disabled selected>📍 مدينة الانطلاق</option>
-            <option>طرابلس</option>
-            <option>بنغازي</option>
-            <option>مصراتة</option>
-            <option>سرت</option>
-            <option>الزاوية</option>
-            <option>البيضاء</option>
-            <option>سبها</option>
-            <option>الكفرة</option>
-            <option>ترهونة</option>
-            <option>غريان</option>
-          </select>
-        </div>
-        <div class="form-group" style="margin:0">
-          <select class="form-control" id="to-city-main">
-            <option value="" disabled selected>🎯 الوجهة</option>
-            <option>طرابلس</option>
-            <option>بنغازي</option>
-            <option>مصراتة</option>
-            <option>سرت</option>
-            <option>الزاوية</option>
-            <option>البيضاء</option>
-            <option>سبها</option>
-            <option>الكفرة</option>
-            <option>ترهونة</option>
-            <option>غريان</option>
-          </select>
-        </div>
-        <a href="roads.html" class="btn-primary">🔍 بحث</a>
-      </div>
-    </div>
   </div>
-
-  <!-- ===== STATUS CARDS ===== -->
-  <section class="status-section">
-    <div class="section-label">📊 حالة الطرق الآن</div>
-    <div class="section-title">نظرة عامة على <span>شبكة الطرق</span></div>
-    <p class="section-desc">معلومات محدَّثة لحظياً عن حالة الطرق في كافة أرجاء ليبيا</p>
-
-    <div class="status-grid">
-
-      <div class="status-card safe animate-in" onclick="window.location='roads.html'">
-        <div class="sc-icon">✅</div>
-        <div class="sc-num" data-count="31">0</div>
-        <div class="sc-label">طريق آمن</div>
-        <div class="sc-sub">⬆ 4 طرق إضافية هذا الأسبوع</div>
-      </div>
-
-      <div class="status-card warn animate-in" onclick="window.location='roads.html'">
-        <div class="sc-icon">⚠️</div>
-        <div class="sc-num" data-count="8">0</div>
-        <div class="sc-label">ازدحام مروري</div>
-        <div class="sc-sub">🔴 في ساعات الذروة</div>
-      </div>
-
-      <div class="status-card danger animate-in" onclick="window.location='reports.html'">
-        <div class="sc-icon">🚨</div>
-        <div class="sc-num" data-count="3">0</div>
-        <div class="sc-label">حادث مروري</div>
-        <div class="sc-sub">تحديث منذ 12 دقيقة</div>
-      </div>
-
-      <div class="status-card closed animate-in" onclick="window.location='roads.html'">
-        <div class="sc-icon">🚫</div>
-        <div class="sc-num" data-count="6">0</div>
-        <div class="sc-label">طريق مغلق</div>
-        <div class="sc-sub">أعمال صيانة وإنشاء</div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ===== FEATURED ROADS ===== -->
-  <section class="roads-section">
-    <div class="section-label">🛣 الطرق الرئيسية</div>
-    <div class="section-title">أبرز <span>المحاور المرورية</span></div>
-    <p class="section-desc">حالة الطرق الرئيسية المحدَّثة في الوقت الفعلي</p>
-
-    <div class="roads-list">
-
-      <div class="road-item animate-in">
-        <div class="road-num">T1</div>
-        <div class="road-info">
-          <div class="road-name">الطريق الساحلي الغربي</div>
-          <div class="road-cities">طرابلس ← الزاوية ← صبراتة ← زوارة</div>
-        </div>
-        <div class="road-meta">
-          <span class="road-dist">📏 140 كم</span>
-          <span class="road-time">⏱ 1.5 ساعة</span>
-          <span class="badge badge-safe"><span class="status-dot safe"></span> آمن</span>
-        </div>
-      </div>
-
-      <div class="road-item animate-in">
-        <div class="road-num">T2</div>
-        <div class="road-info">
-          <div class="road-name">الطريق الساحلي الشرقي</div>
-          <div class="road-cities">طرابلس ← مصراتة ← سرت ← بنغازي</div>
-        </div>
-        <div class="road-meta">
-          <span class="road-dist">📏 1050 كم</span>
-          <span class="road-time">⏱ 11 ساعة</span>
-          <span class="badge badge-warning"><span class="status-dot warning"></span> ازدحام</span>
-        </div>
-      </div>
-
-      <div class="road-item animate-in">
-        <div class="road-num">B1</div>
-        <div class="road-info">
-          <div class="road-name">طريق بنغازي – البيضاء</div>
-          <div class="road-cities">بنغازي ← المرج ← البيضاء ← شحات</div>
-        </div>
-        <div class="road-meta">
-          <span class="road-dist">📏 220 كم</span>
-          <span class="road-time">⏱ 2.5 ساعة</span>
-          <span class="badge badge-danger"><span class="status-dot danger"></span> حادث</span>
-        </div>
-      </div>
-
-      <div class="road-item animate-in">
-        <div class="road-num">S1</div>
-        <div class="road-info">
-          <div class="road-name">طريق طرابلس – غريان</div>
-          <div class="road-cities">طرابلس ← ترهونة ← بني وليد ← غريان</div>
-        </div>
-        <div class="road-meta">
-          <span class="road-dist">📏 165 كم</span>
-          <span class="road-time">⏱ 2 ساعة</span>
-          <span class="badge badge-safe"><span class="status-dot safe"></span> آمن</span>
-        </div>
-      </div>
-
-      <div class="road-item animate-in">
-        <div class="road-num">D1</div>
-        <div class="road-info">
-          <div class="road-name">الطريق الصحراوي</div>
-          <div class="road-cities">طرابلس ← غريان ← سبها ← الكفرة</div>
-        </div>
-        <div class="road-meta">
-          <span class="road-dist">📏 1800 كم</span>
-          <span class="road-time">⏱ 2 يوم</span>
-          <span class="badge badge-closed"><span class="status-dot closed"></span> مغلق جزئياً</span>
-        </div>
-      </div>
-
-    </div>
-
-    <div style="margin-top:1.5rem;text-align:center">
-      <a href="roads.html" class="btn-secondary">عرض جميع الطرق ←</a>
-    </div>
-  </section>
-
-  <!-- ===== STATS ===== -->
-  <section class="stats-section">
-    <div class="section-label text-center" style="margin:0 auto 1.5rem">📈 إحصائياتنا</div>
-    <div class="section-title text-center">أرقام <span>تتحدث عن نفسها</span></div>
-
-    <div class="stats-grid" style="margin-top:2.5rem">
-      <div class="stat-item animate-in">
-        <span class="num" data-count="48">0</span>
-        <div class="label">طريق مراقَب</div>
-      </div>
-      <div class="stat-item animate-in">
-        <span class="num" data-count="1240">0</span>
-        <div class="label">مستخدم نشط</div>
-      </div>
-      <div class="stat-item animate-in">
-        <span class="num" data-count="320">0</span>
-        <div class="label">بلاغ هذا الشهر</div>
-      </div>
-      <div class="stat-item animate-in">
-        <span class="num" data-count="98">0</span><span class="unit" style="color:var(--green-main)">%</span>
-        <div class="label">دقة المعلومات</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== HOW IT WORKS ===== -->
-  <section class="section">
-    <div class="section-label">⚙️ كيف يعمل</div>
-    <div class="section-title">بسيط وسريع <span>وموثوق</span></div>
-
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2rem">
-
-      <div class="card animate-in" style="text-align:center;padding:2rem">
-        <div style="font-size:2.5rem;margin-bottom:1rem">🔍</div>
-        <h3 style="margin-bottom:0.5rem;font-size:1.05rem">1. ابحث عن طريقك</h3>
-        <p style="color:var(--text-muted);font-size:0.88rem">أدخل مدينة الانطلاق والوجهة وابحث</p>
-      </div>
-
-      <div class="card animate-in" style="text-align:center;padding:2rem">
-        <div style="font-size:2.5rem;margin-bottom:1rem">📊</div>
-        <h3 style="margin-bottom:0.5rem;font-size:1.05rem">2. اطلع على الحالة</h3>
-        <p style="color:var(--text-muted);font-size:0.88rem">احصل على معلومات لحظية عن الطريق</p>
-      </div>
-
-      <div class="card animate-in" style="text-align:center;padding:2rem">
-        <div style="font-size:2.5rem;margin-bottom:1rem">🛡</div>
-        <h3 style="margin-bottom:0.5rem;font-size:1.05rem">3. سافر بأمان</h3>
-        <p style="color:var(--text-muted);font-size:0.88rem">اتخذ قرارك بثقة وسافر بأمان تام</p>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ===== FOOTER ===== -->
-  <footer class="footer">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <div class="nav-logo">
-          <div class="logo-icon">🛣</div>
-          Safe<span>Road</span> Libya
-        </div>
-        <p>منصة ذكية لمراقبة الطرق وحالة المرور في ليبيا. نساعدك على السفر بأمان وثقة.</p>
-        <div class="social-links" style="margin-top:1rem">
-          <a href="#" class="social-link">𝕏</a>
-          <a href="#" class="social-link">f</a>
-          <a href="#" class="social-link">in</a>
-          <a href="#" class="social-link">📧</a>
-        </div>
-      </div>
-
-      <div class="footer-col">
-        <h4>الصفحات</h4>
-        <ul>
-          <li><a href="index.html">الرئيسية</a></li>
-          <li><a href="roads.html">الطرق</a></li>
-          <li><a href="reports.html">البلاغات</a></li>
-          <li><a href="dashboard.html">لوحة التحكم</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-col">
-        <h4>خدماتنا</h4>
-        <ul>
-          <li><a href="#">مراقبة الطرق</a></li>
-          <li><a href="#">الإشعارات الفورية</a></li>
-          <li><a href="#">تقارير الحوادث</a></li>
-          <li><a href="#">API للمطورين</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-col">
-        <h4>الدعم</h4>
-        <ul>
-          <li><a href="contact.html">تواصل معنا</a></li>
-          <li><a href="#">الأسئلة الشائعة</a></li>
-          <li><a href="#">سياسة الخصوصية</a></li>
-          <li><a href="#">الشروط والأحكام</a></li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="footer-bottom">
-      <span>© 2025 <span>SafeRoad Libya</span> – جميع الحقوق محفوظة</span>
-      <span>صُنع بـ ❤️ في ليبيا</span>
-    </div>
-  </footer>
 
   <script>
 /* =============================================
@@ -2298,5 +2348,86 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 </script>
+  <script>
+    /* ===== تبديل التبويبات ===== */
+    function switchTab(tab) {
+      const loginForm    = document.getElementById('loginForm');
+      const registerForm = document.getElementById('registerForm');
+      const loginTab     = document.getElementById('loginTab');
+      const registerTab  = document.getElementById('registerTab');
+
+      if (tab === 'login') {
+        loginForm.style.display    = 'block';
+        registerForm.style.display = 'none';
+        loginTab.classList.add('active');
+        registerTab.classList.remove('active');
+        loginForm.classList.add('form-slide-in');
+        setTimeout(() => loginForm.classList.remove('form-slide-in'), 300);
+      } else {
+        loginForm.style.display    = 'none';
+        registerForm.style.display = 'block';
+        loginTab.classList.remove('active');
+        registerTab.classList.add('active');
+        registerForm.classList.add('form-slide-in');
+        setTimeout(() => registerForm.classList.remove('form-slide-in'), 300);
+      }
+    }
+
+    /* ===== معالجة التسجيل ===== */
+    function handleRegister(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('button[type="submit"]');
+      btn.disabled = true;
+      btn.textContent = '⏳ جاري إنشاء الحساب...';
+
+      setTimeout(() => {
+        showToast('🎉 تم إنشاء حسابك بنجاح! مرحباً بك في SafeRoad Libya', 'success');
+        btn.disabled = false;
+        btn.textContent = '✨ إنشاء الحساب مجاناً';
+        setTimeout(() => { window.location.href = 'index.html'; }, 1500);
+      }, 1800);
+    }
+
+    /* ===== مؤشر قوة كلمة المرور ===== */
+    function checkPasswordStrength(pwd) {
+      const fill = document.getElementById('strengthFill');
+      const text = document.getElementById('strengthText');
+
+      let strength = 0;
+      if (pwd.length >= 8)              strength++;
+      if (/[A-Z]/.test(pwd))            strength++;
+      if (/[0-9]/.test(pwd))            strength++;
+      if (/[^A-Za-z0-9]/.test(pwd))     strength++;
+
+      const levels = [
+        { w: '0%',   c: 'transparent', t: 'أدخل كلمة مرور' },
+        { w: '25%',  c: '#ff4b4b',     t: '⚠️ ضعيفة جداً' },
+        { w: '50%',  c: '#ff9800',     t: '⚡ مقبولة' },
+        { w: '75%',  c: '#ffd740',     t: '👍 جيدة' },
+        { w: '100%', c: '#00e676',     t: '✅ قوية جداً' },
+      ];
+
+      const lvl = levels[strength] || levels[0];
+      fill.style.width      = lvl.w;
+      fill.style.background = lvl.c;
+      text.textContent      = lvl.t;
+      text.style.color      = lvl.c;
+    }
+
+    /* ===== جسيمات الخلفية ===== */
+    (function createParticles() {
+      const container = document.getElementById('particles');
+      for (let i = 0; i < 30; i++) {
+        const p = document.createElement('div');
+        p.className = 'particle';
+        p.style.left          = Math.random() * 100 + '%';
+        p.style.animationDuration = (Math.random() * 8 + 6) + 's';
+        p.style.animationDelay    = (Math.random() * 8) + 's';
+        p.style.width  = (Math.random() * 3 + 1) + 'px';
+        p.style.height = p.style.width;
+        container.appendChild(p);
+      }
+    })();
+  </script>
 </body>
 </html>

@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SafeRoad Libya – منصة مراقبة الطرق</title>
-  <meta name="description" content="منصة ذكية لمراقبة الطرق وحالة المرور في ليبيا" />
+  <title>البلاغات – SafeRoad Libya</title>
   <style>
 /* =============================================
    SafeRoad Libya - style.css
@@ -1480,30 +1479,21 @@ textarea.form-control { resize: vertical; min-height: 120px; }
 </head>
 <body>
 
-  <!-- ===== NAVBAR ===== -->
-  <nav class="navbar" id="navbar">
-    <a href="index.html" class="nav-logo">
-      <div class="logo-icon">🛣</div>
-      Safe<span>Road</span> Libya
-    </a>
-
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <a href="index.html" class="nav-logo"><div class="logo-icon">🛣</div>Safe<span>Road</span> Libya</a>
     <ul class="nav-links">
-      <li><a href="index.html" class="active">الرئيسية</a></li>
+      <li><a href="index.html">الرئيسية</a></li>
       <li><a href="roads.html">الطرق</a></li>
-      <li><a href="reports.html">البلاغات</a></li>
+      <li><a href="reports.html" class="active">البلاغات</a></li>
       <li><a href="dashboard.html">لوحة التحكم</a></li>
       <li><a href="contact.html">تواصل معنا</a></li>
     </ul>
-
     <div class="nav-actions">
       <a href="login.html" class="btn-nav-login">تسجيل الدخول</a>
-      <button class="hamburger" aria-label="القائمة">
-        <span></span><span></span><span></span>
-      </button>
+      <button class="hamburger"><span></span><span></span><span></span></button>
     </div>
   </nav>
-
-  <!-- Mobile Menu -->
   <div class="mobile-menu">
     <a href="index.html">🏠 الرئيسية</a>
     <a href="roads.html">🛣 الطرق</a>
@@ -1513,336 +1503,284 @@ textarea.form-control { resize: vertical; min-height: 120px; }
     <a href="login.html">🔐 تسجيل الدخول</a>
   </div>
 
-  <!-- ===== HERO ===== -->
-  <section class="hero">
-    <div class="hero-bg"></div>
-    <div class="hero-grid-lines"></div>
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="page-header-content">
+      <div class="section-label">📋 بلاغات المستخدمين</div>
+      <h1>مجتمع <span style="color:var(--green-main)">SafeRoad</span></h1>
+      <p class="text-muted">بلاغات المستخدمين الفورية – شارك وساعد الآخرين على السفر بأمان</p>
+    </div>
+  </div>
 
-    <div class="hero-content">
-      <div class="hero-badge">
-        <div class="dot"></div>
-        منصة مراقبة الطرق الأولى في ليبيا
+  <!-- LAYOUT -->
+  <div class="reports-layout">
+
+    <!-- فلتر جانبي -->
+    <div>
+      <h3 style="font-size:0.95rem;font-weight:700;margin-bottom:1rem;color:var(--text-secondary)">🎛 تصفية البلاغات</h3>
+
+      <div class="filter-panel">
+        <button class="filter-btn active" data-filter="all">
+          📋 جميع البلاغات <span class="count">24</span>
+        </button>
+        <button class="filter-btn" data-filter="danger">
+          🚨 حوادث <span class="count">8</span>
+        </button>
+        <button class="filter-btn" data-filter="warning">
+          ⚠️ ازدحام <span class="count">11</span>
+        </button>
+        <button class="filter-btn" data-filter="closed">
+          🚫 طرق مغلقة <span class="count">5</span>
+        </button>
       </div>
 
-      <h1>
-        سافر بأمان مع<br/>
-        <span class="highlight">SafeRoad Libya</span>
-      </h1>
-
-      <p>
-        منصة ذكية لمراقبة حالة الطرق والمرور في ليبيا بشكل لحظي.
-        تعرف على الطرق الآمنة، الحوادث، الازدحام، والطرق المغلقة قبل السفر.
-      </p>
-
-      <div class="hero-actions">
-        <a href="roads.html" class="btn-primary">🔍 تحقق من حالة الطريق</a>
-        <a href="reports.html" class="btn-secondary">📋 عرض البلاغات</a>
+      <!-- إحصائيات سريعة -->
+      <div style="margin-top:1.5rem">
+        <h3 style="font-size:0.88rem;font-weight:700;margin-bottom:0.8rem;color:var(--text-secondary)">📊 إحصائيات اليوم</h3>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <span style="font-size:0.82rem;color:var(--text-muted)">إجمالي البلاغات</span>
+            <span style="font-weight:700;color:var(--green-main)">24</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <span style="font-size:0.82rem;color:var(--text-muted)">تم التحقق منها</span>
+            <span style="font-weight:700;color:var(--text-primary)">18</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <span style="font-size:0.82rem;color:var(--text-muted)">قيد المراجعة</span>
+            <span style="font-weight:700;color:var(--accent-yellow)">6</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <span style="font-size:0.82rem;color:var(--text-muted)">مستخدمون مساهمون</span>
+            <span style="font-weight:700;color:var(--text-primary)">31</span>
+          </div>
+        </div>
       </div>
 
-      <div class="hero-stats">
-        <div class="hero-stat">
-          <div class="num">48+</div>
-          <div class="lbl">طريق مراقَب</div>
-        </div>
-        <div class="hero-stat">
-          <div class="num">1,240</div>
-          <div class="lbl">مستخدم نشط</div>
-        </div>
-        <div class="hero-stat">
-          <div class="num">320</div>
-          <div class="lbl">بلاغ هذا الشهر</div>
-        </div>
+      <!-- نداء للمشاركة -->
+      <div class="card" style="margin-top:1.5rem;background:var(--green-subtle);border-color:var(--border-green);text-align:center;padding:1.5rem">
+        <div style="font-size:2rem;margin-bottom:0.5rem">🙌</div>
+        <h4 style="font-size:0.9rem;margin-bottom:0.4rem">ساهم في سلامة الطرق</h4>
+        <p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:1rem">بلاغاتك تساعد الآلاف على السفر بأمان</p>
+        <button class="btn-primary" onclick="document.querySelector('.modal-overlay').classList.add('open')" style="width:100%;justify-content:center;font-size:0.88rem">
+          ➕ أضف بلاغاً
+        </button>
       </div>
     </div>
 
-    <!-- بطاقات عائمة -->
-    <div class="hero-visual">
-      <div class="float-card">
-        <div class="icon" style="background:rgba(0,230,118,0.12);color:#00e676">✅</div>
-        <div class="info">
-          <div class="title">طرابلس ← مصراتة</div>
-          <div class="value" style="color:#00e676">آمن</div>
-        </div>
+    <!-- قائمة البلاغات -->
+    <div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem">
+        <span style="font-size:0.88rem;color:var(--text-muted)">عرض 24 بلاغ</span>
+        <select class="form-control" style="width:auto;padding:6px 12px;font-size:0.82rem">
+          <option>الأحدث أولاً</option>
+          <option>الأعلى تقييماً</option>
+          <option>حسب النوع</option>
+        </select>
       </div>
-      <div class="float-card">
-        <div class="icon" style="background:rgba(255,75,75,0.12);color:#ff4b4b">🚨</div>
-        <div class="info">
-          <div class="title">بنغازي ← البيضاء</div>
-          <div class="value" style="color:#ff4b4b">حادث مروري</div>
-        </div>
-      </div>
-      <div class="float-card">
-        <div class="icon" style="background:rgba(255,215,64,0.12);color:#ffd740">⚠️</div>
-        <div class="info">
-          <div class="title">طرابلس ← الزاوية</div>
-          <div class="value" style="color:#ffd740">ازدحام</div>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- ===== SEARCH ===== -->
-  <div class="search-section">
-    <div class="search-box animate-in">
-      <h3>🔍 ابحث عن حالة طريقك</h3>
-      <div class="search-row">
-        <div class="form-group" style="margin:0">
-          <select class="form-control" id="from-city-main">
-            <option value="" disabled selected>📍 مدينة الانطلاق</option>
-            <option>طرابلس</option>
-            <option>بنغازي</option>
-            <option>مصراتة</option>
-            <option>سرت</option>
-            <option>الزاوية</option>
-            <option>البيضاء</option>
-            <option>سبها</option>
-            <option>الكفرة</option>
-            <option>ترهونة</option>
-            <option>غريان</option>
-          </select>
+      <div class="reports-list">
+
+        <!-- بلاغ 1 -->
+        <div class="report-card danger animate-in">
+          <div class="report-icon">🚨</div>
+          <div class="report-body">
+            <div class="report-title">حادث تصادم على طريق بنغازي – المرج</div>
+            <div class="report-location">📍 كيلو 45 من بنغازي باتجاه المرج</div>
+            <div class="report-desc">تصادم بين مركبتين خفيفتين، الطريق مسدود جزئياً. الشرطة موجودة في المكان.</div>
+            <div class="report-footer">
+              <span class="report-time">🕐 منذ 12 دقيقة</span>
+              <span class="badge badge-danger">🚨 حادث</span>
+              <span class="report-votes">👍 47 تأكيد</span>
+            </div>
+          </div>
         </div>
-        <div class="form-group" style="margin:0">
-          <select class="form-control" id="to-city-main">
-            <option value="" disabled selected>🎯 الوجهة</option>
-            <option>طرابلس</option>
-            <option>بنغازي</option>
-            <option>مصراتة</option>
-            <option>سرت</option>
-            <option>الزاوية</option>
-            <option>البيضاء</option>
-            <option>سبها</option>
-            <option>الكفرة</option>
-            <option>ترهونة</option>
-            <option>غريان</option>
-          </select>
+
+        <!-- بلاغ 2 -->
+        <div class="report-card warning animate-in">
+          <div class="report-icon">⚠️</div>
+          <div class="report-body">
+            <div class="report-title">ازدحام شديد على الطريق الدائري طرابلس</div>
+            <div class="report-location">📍 تقاطع الدائري بمنطقة عين زارة</div>
+            <div class="report-desc">ازدحام مروري شديد بسبب أعمال حفريات. يُفضَّل الالتفاف عبر طريق السواني.</div>
+            <div class="report-footer">
+              <span class="report-time">🕐 منذ 28 دقيقة</span>
+              <span class="badge badge-warning">⚠️ ازدحام</span>
+              <span class="report-votes">👍 89 تأكيد</span>
+            </div>
+          </div>
         </div>
-        <a href="roads.html" class="btn-primary">🔍 بحث</a>
+
+        <!-- بلاغ 3 -->
+        <div class="report-card closed animate-in">
+          <div class="report-icon">🚫</div>
+          <div class="report-body">
+            <div class="report-title">إغلاق طريق غريان – براك بسبب الصيانة</div>
+            <div class="report-location">📍 الكيلو 20 من غريان باتجاه الجنوب</div>
+            <div class="report-desc">الطريق مغلق بسبب أعمال صيانة جسر. المتوقع فتحه بعد 3 أيام. استخدم الطريق الفرعي.</div>
+            <div class="report-footer">
+              <span class="report-time">🕐 منذ 2 ساعة</span>
+              <span class="badge badge-closed">🚫 مغلق</span>
+              <span class="report-votes">👍 134 تأكيد</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- بلاغ 4 -->
+        <div class="report-card warning animate-in">
+          <div class="report-icon">⚠️</div>
+          <div class="report-body">
+            <div class="report-title">تباطؤ مروري على الطريق الساحلي قرب مصراتة</div>
+            <div class="report-location">📍 مدخل مصراتة الغربي</div>
+            <div class="report-desc">ازدحام متوسط عند مدخل المدينة بسبب نقطة التفتيش. حركة بطيئة لمدة 15 دقيقة تقريباً.</div>
+            <div class="report-footer">
+              <span class="report-time">🕐 منذ 45 دقيقة</span>
+              <span class="badge badge-warning">⚠️ ازدحام</span>
+              <span class="report-votes">👍 62 تأكيد</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- بلاغ 5 -->
+        <div class="report-card danger animate-in">
+          <div class="report-icon">🚨</div>
+          <div class="report-body">
+            <div class="report-title">انقلاب شاحنة على الطريق السريع سرت</div>
+            <div class="report-location">📍 طريق سرت باتجاه بنغازي – كيلو 12</div>
+            <div class="report-desc">انقلاب شاحنة محملة بالبضائع. الطريق مسدود بالكامل. يُرجى تجنب هذا المسار حتى إشعار آخر.</div>
+            <div class="report-footer">
+              <span class="report-time">🕐 منذ 1 ساعة 10 دقيقة</span>
+              <span class="badge badge-danger">🚨 حادث</span>
+              <span class="report-votes">👍 211 تأكيد</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- بلاغ 6 -->
+        <div class="report-card warning animate-in">
+          <div class="report-icon">⚠️</div>
+          <div class="report-body">
+            <div class="report-title">ازدحام خفيف عند إشارات الزاوية</div>
+            <div class="report-location">📍 وسط مدينة الزاوية – شارع الجمهورية</div>
+            <div class="report-desc">ازدحام خفيف نتيجة ساعة الذروة المسائية. الوضع يتحسن تدريجياً.</div>
+            <div class="report-footer">
+              <span class="report-time">🕐 منذ 3 ساعات</span>
+              <span class="badge badge-warning">⚠️ ازدحام</span>
+              <span class="report-votes">👍 28 تأكيد</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- بلاغ 7 -->
+        <div class="report-card closed animate-in">
+          <div class="report-icon">🚫</div>
+          <div class="report-body">
+            <div class="report-title">إغلاق مفترق طرق صبراتة الرئيسي</div>
+            <div class="report-location">📍 تقاطع صبراتة الرئيسي</div>
+            <div class="report-desc">إغلاق مؤقت بسبب احتفالية رسمية. سيعاد الفتح مساء اليوم الساعة 8 مساءً.</div>
+            <div class="report-footer">
+              <span class="report-time">🕐 منذ 4 ساعات</span>
+              <span class="badge badge-closed">🚫 مغلق</span>
+              <span class="report-votes">👍 76 تأكيد</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- بلاغ 8 -->
+        <div class="report-card danger animate-in">
+          <div class="report-icon">🚨</div>
+          <div class="report-body">
+            <div class="report-title">حادث دهس طريق البيضاء – درنة</div>
+            <div class="report-location">📍 خارج مدينة البيضاء – الكيلو 8</div>
+            <div class="report-desc">حادث دهس على حافة الطريق. تحرك بحذر شديد. سيارات الإسعاف في الموقع.</div>
+            <div class="report-footer">
+              <span class="report-time">🕐 منذ 5 ساعات</span>
+              <span class="badge badge-danger">🚨 حادث</span>
+              <span class="report-votes">👍 93 تأكيد</span>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
 
-  <!-- ===== STATUS CARDS ===== -->
-  <section class="status-section">
-    <div class="section-label">📊 حالة الطرق الآن</div>
-    <div class="section-title">نظرة عامة على <span>شبكة الطرق</span></div>
-    <p class="section-desc">معلومات محدَّثة لحظياً عن حالة الطرق في كافة أرجاء ليبيا</p>
+  <!-- FAB -->
+  <button class="fab" title="إضافة بلاغ جديد">+</button>
 
-    <div class="status-grid">
-
-      <div class="status-card safe animate-in" onclick="window.location='roads.html'">
-        <div class="sc-icon">✅</div>
-        <div class="sc-num" data-count="31">0</div>
-        <div class="sc-label">طريق آمن</div>
-        <div class="sc-sub">⬆ 4 طرق إضافية هذا الأسبوع</div>
+  <!-- MODAL إضافة بلاغ -->
+  <div class="modal-overlay">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>📝 إضافة بلاغ جديد</h3>
+        <button class="modal-close">✕</button>
       </div>
 
-      <div class="status-card warn animate-in" onclick="window.location='roads.html'">
-        <div class="sc-icon">⚠️</div>
-        <div class="sc-num" data-count="8">0</div>
-        <div class="sc-label">ازدحام مروري</div>
-        <div class="sc-sub">🔴 في ساعات الذروة</div>
-      </div>
+      <form class="report-form">
+        <div class="form-group">
+          <label>نوع البلاغ</label>
+          <select class="form-control" required>
+            <option value="" disabled selected>اختر نوع البلاغ</option>
+            <option value="accident">🚨 حادث مروري</option>
+            <option value="traffic">⚠️ ازدحام مروري</option>
+            <option value="closed">🚫 طريق مغلق</option>
+            <option value="road-damage">🕳 تلف في الطريق</option>
+            <option value="other">📌 أخرى</option>
+          </select>
+        </div>
 
-      <div class="status-card danger animate-in" onclick="window.location='reports.html'">
-        <div class="sc-icon">🚨</div>
-        <div class="sc-num" data-count="3">0</div>
-        <div class="sc-label">حادث مروري</div>
-        <div class="sc-sub">تحديث منذ 12 دقيقة</div>
-      </div>
+        <div class="form-group">
+          <label>الموقع</label>
+          <input type="text" class="form-control" placeholder="مثال: طريق طرابلس – الزاوية كيلو 15" required>
+        </div>
 
-      <div class="status-card closed animate-in" onclick="window.location='roads.html'">
-        <div class="sc-icon">🚫</div>
-        <div class="sc-num" data-count="6">0</div>
-        <div class="sc-label">طريق مغلق</div>
-        <div class="sc-sub">أعمال صيانة وإنشاء</div>
-      </div>
+        <div class="form-group">
+          <label>المدينة</label>
+          <select class="form-control" required>
+            <option value="" disabled selected>اختر المدينة</option>
+            <option>طرابلس</option><option>بنغازي</option><option>مصراتة</option>
+            <option>سرت</option><option>الزاوية</option><option>البيضاء</option>
+            <option>سبها</option><option>غريان</option>
+          </select>
+        </div>
 
+        <div class="form-group">
+          <label>وصف البلاغ</label>
+          <textarea class="form-control" rows="3" placeholder="اكتب وصفاً مختصراً للحالة..."></textarea>
+        </div>
+
+        <div style="display:flex;gap:10px;justify-content:flex-end">
+          <button type="button" class="btn-secondary modal-cancel">إلغاء</button>
+          <button type="submit" class="btn-primary">📤 إرسال البلاغ</button>
+        </div>
+      </form>
     </div>
-  </section>
+  </div>
 
-  <!-- ===== FEATURED ROADS ===== -->
-  <section class="roads-section">
-    <div class="section-label">🛣 الطرق الرئيسية</div>
-    <div class="section-title">أبرز <span>المحاور المرورية</span></div>
-    <p class="section-desc">حالة الطرق الرئيسية المحدَّثة في الوقت الفعلي</p>
-
-    <div class="roads-list">
-
-      <div class="road-item animate-in">
-        <div class="road-num">T1</div>
-        <div class="road-info">
-          <div class="road-name">الطريق الساحلي الغربي</div>
-          <div class="road-cities">طرابلس ← الزاوية ← صبراتة ← زوارة</div>
-        </div>
-        <div class="road-meta">
-          <span class="road-dist">📏 140 كم</span>
-          <span class="road-time">⏱ 1.5 ساعة</span>
-          <span class="badge badge-safe"><span class="status-dot safe"></span> آمن</span>
-        </div>
-      </div>
-
-      <div class="road-item animate-in">
-        <div class="road-num">T2</div>
-        <div class="road-info">
-          <div class="road-name">الطريق الساحلي الشرقي</div>
-          <div class="road-cities">طرابلس ← مصراتة ← سرت ← بنغازي</div>
-        </div>
-        <div class="road-meta">
-          <span class="road-dist">📏 1050 كم</span>
-          <span class="road-time">⏱ 11 ساعة</span>
-          <span class="badge badge-warning"><span class="status-dot warning"></span> ازدحام</span>
-        </div>
-      </div>
-
-      <div class="road-item animate-in">
-        <div class="road-num">B1</div>
-        <div class="road-info">
-          <div class="road-name">طريق بنغازي – البيضاء</div>
-          <div class="road-cities">بنغازي ← المرج ← البيضاء ← شحات</div>
-        </div>
-        <div class="road-meta">
-          <span class="road-dist">📏 220 كم</span>
-          <span class="road-time">⏱ 2.5 ساعة</span>
-          <span class="badge badge-danger"><span class="status-dot danger"></span> حادث</span>
-        </div>
-      </div>
-
-      <div class="road-item animate-in">
-        <div class="road-num">S1</div>
-        <div class="road-info">
-          <div class="road-name">طريق طرابلس – غريان</div>
-          <div class="road-cities">طرابلس ← ترهونة ← بني وليد ← غريان</div>
-        </div>
-        <div class="road-meta">
-          <span class="road-dist">📏 165 كم</span>
-          <span class="road-time">⏱ 2 ساعة</span>
-          <span class="badge badge-safe"><span class="status-dot safe"></span> آمن</span>
-        </div>
-      </div>
-
-      <div class="road-item animate-in">
-        <div class="road-num">D1</div>
-        <div class="road-info">
-          <div class="road-name">الطريق الصحراوي</div>
-          <div class="road-cities">طرابلس ← غريان ← سبها ← الكفرة</div>
-        </div>
-        <div class="road-meta">
-          <span class="road-dist">📏 1800 كم</span>
-          <span class="road-time">⏱ 2 يوم</span>
-          <span class="badge badge-closed"><span class="status-dot closed"></span> مغلق جزئياً</span>
-        </div>
-      </div>
-
-    </div>
-
-    <div style="margin-top:1.5rem;text-align:center">
-      <a href="roads.html" class="btn-secondary">عرض جميع الطرق ←</a>
-    </div>
-  </section>
-
-  <!-- ===== STATS ===== -->
-  <section class="stats-section">
-    <div class="section-label text-center" style="margin:0 auto 1.5rem">📈 إحصائياتنا</div>
-    <div class="section-title text-center">أرقام <span>تتحدث عن نفسها</span></div>
-
-    <div class="stats-grid" style="margin-top:2.5rem">
-      <div class="stat-item animate-in">
-        <span class="num" data-count="48">0</span>
-        <div class="label">طريق مراقَب</div>
-      </div>
-      <div class="stat-item animate-in">
-        <span class="num" data-count="1240">0</span>
-        <div class="label">مستخدم نشط</div>
-      </div>
-      <div class="stat-item animate-in">
-        <span class="num" data-count="320">0</span>
-        <div class="label">بلاغ هذا الشهر</div>
-      </div>
-      <div class="stat-item animate-in">
-        <span class="num" data-count="98">0</span><span class="unit" style="color:var(--green-main)">%</span>
-        <div class="label">دقة المعلومات</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== HOW IT WORKS ===== -->
-  <section class="section">
-    <div class="section-label">⚙️ كيف يعمل</div>
-    <div class="section-title">بسيط وسريع <span>وموثوق</span></div>
-
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2rem">
-
-      <div class="card animate-in" style="text-align:center;padding:2rem">
-        <div style="font-size:2.5rem;margin-bottom:1rem">🔍</div>
-        <h3 style="margin-bottom:0.5rem;font-size:1.05rem">1. ابحث عن طريقك</h3>
-        <p style="color:var(--text-muted);font-size:0.88rem">أدخل مدينة الانطلاق والوجهة وابحث</p>
-      </div>
-
-      <div class="card animate-in" style="text-align:center;padding:2rem">
-        <div style="font-size:2.5rem;margin-bottom:1rem">📊</div>
-        <h3 style="margin-bottom:0.5rem;font-size:1.05rem">2. اطلع على الحالة</h3>
-        <p style="color:var(--text-muted);font-size:0.88rem">احصل على معلومات لحظية عن الطريق</p>
-      </div>
-
-      <div class="card animate-in" style="text-align:center;padding:2rem">
-        <div style="font-size:2.5rem;margin-bottom:1rem">🛡</div>
-        <h3 style="margin-bottom:0.5rem;font-size:1.05rem">3. سافر بأمان</h3>
-        <p style="color:var(--text-muted);font-size:0.88rem">اتخذ قرارك بثقة وسافر بأمان تام</p>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ===== FOOTER ===== -->
+  <!-- FOOTER -->
   <footer class="footer">
     <div class="footer-grid">
       <div class="footer-brand">
-        <div class="nav-logo">
-          <div class="logo-icon">🛣</div>
-          Safe<span>Road</span> Libya
-        </div>
-        <p>منصة ذكية لمراقبة الطرق وحالة المرور في ليبيا. نساعدك على السفر بأمان وثقة.</p>
-        <div class="social-links" style="margin-top:1rem">
-          <a href="#" class="social-link">𝕏</a>
-          <a href="#" class="social-link">f</a>
-          <a href="#" class="social-link">in</a>
-          <a href="#" class="social-link">📧</a>
-        </div>
+        <div class="nav-logo"><div class="logo-icon">🛣</div>Safe<span>Road</span> Libya</div>
+        <p>منصة ذكية لمراقبة الطرق وحالة المرور في ليبيا.</p>
       </div>
-
-      <div class="footer-col">
-        <h4>الصفحات</h4>
-        <ul>
-          <li><a href="index.html">الرئيسية</a></li>
-          <li><a href="roads.html">الطرق</a></li>
-          <li><a href="reports.html">البلاغات</a></li>
-          <li><a href="dashboard.html">لوحة التحكم</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-col">
-        <h4>خدماتنا</h4>
-        <ul>
-          <li><a href="#">مراقبة الطرق</a></li>
-          <li><a href="#">الإشعارات الفورية</a></li>
-          <li><a href="#">تقارير الحوادث</a></li>
-          <li><a href="#">API للمطورين</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-col">
-        <h4>الدعم</h4>
-        <ul>
-          <li><a href="contact.html">تواصل معنا</a></li>
-          <li><a href="#">الأسئلة الشائعة</a></li>
-          <li><a href="#">سياسة الخصوصية</a></li>
-          <li><a href="#">الشروط والأحكام</a></li>
-        </ul>
-      </div>
+      <div class="footer-col"><h4>الصفحات</h4><ul>
+        <li><a href="index.html">الرئيسية</a></li>
+        <li><a href="roads.html">الطرق</a></li>
+        <li><a href="reports.html">البلاغات</a></li>
+        <li><a href="dashboard.html">لوحة التحكم</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>خدماتنا</h4><ul>
+        <li><a href="#">مراقبة الطرق</a></li>
+        <li><a href="#">الإشعارات</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>الدعم</h4><ul>
+        <li><a href="contact.html">تواصل معنا</a></li>
+        <li><a href="#">الأسئلة الشائعة</a></li>
+      </ul></div>
     </div>
-
     <div class="footer-bottom">
-      <span>© 2025 <span>SafeRoad Libya</span> – جميع الحقوق محفوظة</span>
+      <span>© 2025 <span>SafeRoad Libya</span></span>
       <span>صُنع بـ ❤️ في ليبيا</span>
     </div>
   </footer>

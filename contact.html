@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SafeRoad Libya – منصة مراقبة الطرق</title>
-  <meta name="description" content="منصة ذكية لمراقبة الطرق وحالة المرور في ليبيا" />
+  <title>تواصل معنا – SafeRoad Libya</title>
   <style>
 /* =============================================
    SafeRoad Libya - style.css
@@ -1480,30 +1479,24 @@ textarea.form-control { resize: vertical; min-height: 120px; }
 </head>
 <body>
 
-  <!-- ===== NAVBAR ===== -->
-  <nav class="navbar" id="navbar">
+  <!-- NAVBAR -->
+  <nav class="navbar">
     <a href="index.html" class="nav-logo">
       <div class="logo-icon">🛣</div>
       Safe<span>Road</span> Libya
     </a>
-
     <ul class="nav-links">
-      <li><a href="index.html" class="active">الرئيسية</a></li>
+      <li><a href="index.html">الرئيسية</a></li>
       <li><a href="roads.html">الطرق</a></li>
       <li><a href="reports.html">البلاغات</a></li>
       <li><a href="dashboard.html">لوحة التحكم</a></li>
-      <li><a href="contact.html">تواصل معنا</a></li>
+      <li><a href="contact.html" class="active">تواصل معنا</a></li>
     </ul>
-
     <div class="nav-actions">
       <a href="login.html" class="btn-nav-login">تسجيل الدخول</a>
-      <button class="hamburger" aria-label="القائمة">
-        <span></span><span></span><span></span>
-      </button>
+      <button class="hamburger"><span></span><span></span><span></span></button>
     </div>
   </nav>
-
-  <!-- Mobile Menu -->
   <div class="mobile-menu">
     <a href="index.html">🏠 الرئيسية</a>
     <a href="roads.html">🛣 الطرق</a>
@@ -1513,294 +1506,182 @@ textarea.form-control { resize: vertical; min-height: 120px; }
     <a href="login.html">🔐 تسجيل الدخول</a>
   </div>
 
-  <!-- ===== HERO ===== -->
-  <section class="hero">
-    <div class="hero-bg"></div>
-    <div class="hero-grid-lines"></div>
-
-    <div class="hero-content">
-      <div class="hero-badge">
-        <div class="dot"></div>
-        منصة مراقبة الطرق الأولى في ليبيا
-      </div>
-
-      <h1>
-        سافر بأمان مع<br/>
-        <span class="highlight">SafeRoad Libya</span>
-      </h1>
-
-      <p>
-        منصة ذكية لمراقبة حالة الطرق والمرور في ليبيا بشكل لحظي.
-        تعرف على الطرق الآمنة، الحوادث، الازدحام، والطرق المغلقة قبل السفر.
-      </p>
-
-      <div class="hero-actions">
-        <a href="roads.html" class="btn-primary">🔍 تحقق من حالة الطريق</a>
-        <a href="reports.html" class="btn-secondary">📋 عرض البلاغات</a>
-      </div>
-
-      <div class="hero-stats">
-        <div class="hero-stat">
-          <div class="num">48+</div>
-          <div class="lbl">طريق مراقَب</div>
-        </div>
-        <div class="hero-stat">
-          <div class="num">1,240</div>
-          <div class="lbl">مستخدم نشط</div>
-        </div>
-        <div class="hero-stat">
-          <div class="num">320</div>
-          <div class="lbl">بلاغ هذا الشهر</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- بطاقات عائمة -->
-    <div class="hero-visual">
-      <div class="float-card">
-        <div class="icon" style="background:rgba(0,230,118,0.12);color:#00e676">✅</div>
-        <div class="info">
-          <div class="title">طرابلس ← مصراتة</div>
-          <div class="value" style="color:#00e676">آمن</div>
-        </div>
-      </div>
-      <div class="float-card">
-        <div class="icon" style="background:rgba(255,75,75,0.12);color:#ff4b4b">🚨</div>
-        <div class="info">
-          <div class="title">بنغازي ← البيضاء</div>
-          <div class="value" style="color:#ff4b4b">حادث مروري</div>
-        </div>
-      </div>
-      <div class="float-card">
-        <div class="icon" style="background:rgba(255,215,64,0.12);color:#ffd740">⚠️</div>
-        <div class="info">
-          <div class="title">طرابلس ← الزاوية</div>
-          <div class="value" style="color:#ffd740">ازدحام</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== SEARCH ===== -->
-  <div class="search-section">
-    <div class="search-box animate-in">
-      <h3>🔍 ابحث عن حالة طريقك</h3>
-      <div class="search-row">
-        <div class="form-group" style="margin:0">
-          <select class="form-control" id="from-city-main">
-            <option value="" disabled selected>📍 مدينة الانطلاق</option>
-            <option>طرابلس</option>
-            <option>بنغازي</option>
-            <option>مصراتة</option>
-            <option>سرت</option>
-            <option>الزاوية</option>
-            <option>البيضاء</option>
-            <option>سبها</option>
-            <option>الكفرة</option>
-            <option>ترهونة</option>
-            <option>غريان</option>
-          </select>
-        </div>
-        <div class="form-group" style="margin:0">
-          <select class="form-control" id="to-city-main">
-            <option value="" disabled selected>🎯 الوجهة</option>
-            <option>طرابلس</option>
-            <option>بنغازي</option>
-            <option>مصراتة</option>
-            <option>سرت</option>
-            <option>الزاوية</option>
-            <option>البيضاء</option>
-            <option>سبها</option>
-            <option>الكفرة</option>
-            <option>ترهونة</option>
-            <option>غريان</option>
-          </select>
-        </div>
-        <a href="roads.html" class="btn-primary">🔍 بحث</a>
-      </div>
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="page-header-content">
+      <div class="section-label">📞 تواصل معنا</div>
+      <h1>نحن هنا <span style="color:var(--green-main)">لمساعدتك</span></h1>
+      <p class="text-muted">فريقنا متاح على مدار الساعة للإجابة على استفساراتك ومساعدتك في كل ما تحتاجه</p>
     </div>
   </div>
 
-  <!-- ===== STATUS CARDS ===== -->
-  <section class="status-section">
-    <div class="section-label">📊 حالة الطرق الآن</div>
-    <div class="section-title">نظرة عامة على <span>شبكة الطرق</span></div>
-    <p class="section-desc">معلومات محدَّثة لحظياً عن حالة الطرق في كافة أرجاء ليبيا</p>
+  <!-- CONTACT LAYOUT -->
+  <div class="contact-layout">
 
-    <div class="status-grid">
+    <!-- معلومات التواصل -->
+    <div>
+      <h2 style="font-size:1.2rem;font-weight:700;margin-bottom:1.2rem">معلومات التواصل</h2>
 
-      <div class="status-card safe animate-in" onclick="window.location='roads.html'">
-        <div class="sc-icon">✅</div>
-        <div class="sc-num" data-count="31">0</div>
-        <div class="sc-label">طريق آمن</div>
-        <div class="sc-sub">⬆ 4 طرق إضافية هذا الأسبوع</div>
+      <div class="contact-info">
+
+        <div class="contact-card animate-in">
+          <div class="cc-icon">📧</div>
+          <div class="cc-info">
+            <div class="cc-label">البريد الإلكتروني</div>
+            <div class="cc-value">support@saferoad.ly</div>
+          </div>
+        </div>
+
+        <div class="contact-card animate-in">
+          <div class="cc-icon">📱</div>
+          <div class="cc-info">
+            <div class="cc-label">رقم الهاتف</div>
+            <div class="cc-value" style="direction:ltr;text-align:right">+218 91 234 5678</div>
+          </div>
+        </div>
+
+        <div class="contact-card animate-in">
+          <div class="cc-icon">📍</div>
+          <div class="cc-info">
+            <div class="cc-label">العنوان</div>
+            <div class="cc-value">طرابلس، ليبيا – حي الأندلس</div>
+          </div>
+        </div>
+
+        <div class="contact-card animate-in">
+          <div class="cc-icon">⏰</div>
+          <div class="cc-info">
+            <div class="cc-label">ساعات العمل</div>
+            <div class="cc-value">الأحد – الخميس: 8ص – 6م</div>
+          </div>
+        </div>
+
+        <div class="contact-card animate-in">
+          <div class="cc-icon">🌐</div>
+          <div class="cc-info">
+            <div class="cc-label">الموقع الإلكتروني</div>
+            <div class="cc-value">www.saferoad.ly</div>
+          </div>
+        </div>
+
       </div>
 
-      <div class="status-card warn animate-in" onclick="window.location='roads.html'">
-        <div class="sc-icon">⚠️</div>
-        <div class="sc-num" data-count="8">0</div>
-        <div class="sc-label">ازدحام مروري</div>
-        <div class="sc-sub">🔴 في ساعات الذروة</div>
+      <!-- شبكات التواصل -->
+      <div style="margin-top:1.5rem">
+        <h3 style="font-size:0.9rem;font-weight:700;color:var(--text-secondary);margin-bottom:0.8rem">تابعنا على</h3>
+        <div style="display:flex;gap:10px">
+          <a href="#" class="social-link" style="width:44px;height:44px;font-size:1rem" title="تويتر">𝕏</a>
+          <a href="#" class="social-link" style="width:44px;height:44px;font-size:1rem" title="فيسبوك">f</a>
+          <a href="#" class="social-link" style="width:44px;height:44px;font-size:1rem" title="لينكد إن">in</a>
+          <a href="#" class="social-link" style="width:44px;height:44px;font-size:1rem" title="واتساب">📱</a>
+        </div>
       </div>
 
-      <div class="status-card danger animate-in" onclick="window.location='reports.html'">
-        <div class="sc-icon">🚨</div>
-        <div class="sc-num" data-count="3">0</div>
-        <div class="sc-label">حادث مروري</div>
-        <div class="sc-sub">تحديث منذ 12 دقيقة</div>
+      <!-- صندوق طوارئ -->
+      <div style="margin-top:1.5rem;background:rgba(255,75,75,0.08);border:1px solid rgba(255,75,75,0.25);border-radius:var(--radius);padding:1.2rem">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+          <span style="font-size:1.1rem">🚨</span>
+          <strong style="color:var(--accent-red);font-size:0.9rem">للحالات الطارئة فقط</strong>
+        </div>
+        <p style="font-size:0.82rem;color:var(--text-muted);margin-bottom:8px">لإبلاغ عن حادث خطير أو طارئ على الطريق</p>
+        <a href="tel:193" style="display:inline-flex;align-items:center;gap:6px;background:var(--accent-red);color:#fff;padding:8px 16px;border-radius:6px;font-weight:700;font-size:0.88rem">
+          📞 اتصل بـ 193 (الطوارئ)
+        </a>
+      </div>
+    </div>
+
+    <!-- نموذج التواصل -->
+    <div class="contact-form-wrap animate-in">
+      <h3>أرسل رسالتك</h3>
+      <p style="color:var(--text-muted);font-size:0.88rem;margin-bottom:1.5rem">سنرد عليك في غضون 24 ساعة من استلام رسالتك</p>
+
+      <form class="contact-form">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+          <div class="form-group">
+            <label>الاسم الكامل *</label>
+            <input type="text" class="form-control" placeholder="أدخل اسمك الكامل" required>
+          </div>
+          <div class="form-group">
+            <label>رقم الهاتف</label>
+            <input type="tel" class="form-control" placeholder="+218 XX XXX XXXX">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>البريد الإلكتروني *</label>
+          <input type="email" class="form-control" placeholder="example@email.com" required>
+        </div>
+
+        <div class="form-group">
+          <label>موضوع الرسالة</label>
+          <select class="form-control">
+            <option value="" disabled selected>اختر الموضوع</option>
+            <option>🐛 الإبلاغ عن مشكلة تقنية</option>
+            <option>💡 اقتراح ميزة جديدة</option>
+            <option>🤝 طلب شراكة</option>
+            <option>📰 استفسار إعلامي</option>
+            <option>🛣 الإبلاغ عن معلومات طريق خاطئة</option>
+            <option>💬 استفسار عام</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>الرسالة *</label>
+          <textarea class="form-control" rows="5" placeholder="اكتب رسالتك هنا بالتفصيل..." required></textarea>
+        </div>
+
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:1.2rem">
+          <input type="checkbox" id="agree" style="accent-color:var(--green-main);width:16px;height:16px">
+          <label for="agree" style="font-size:0.85rem;color:var(--text-muted);cursor:pointer">
+            أوافق على <a href="#" style="color:var(--green-main)">سياسة الخصوصية</a> وشروط الاستخدام
+          </label>
+        </div>
+
+        <button type="submit" class="btn-primary" style="width:100%;justify-content:center;padding:14px">
+          📤 إرسال الرسالة
+        </button>
+      </form>
+    </div>
+
+  </div>
+
+  <!-- FAQ سريع -->
+  <section style="padding:3rem 2.5rem;background:var(--bg-secondary)">
+    <div style="text-align:center;margin-bottom:2rem">
+      <div class="section-label" style="margin:0 auto 0.8rem">❓ الأسئلة الشائعة</div>
+      <h2 class="section-title">إجابات <span>سريعة</span></h2>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;max-width:900px;margin:0 auto">
+
+      <div class="card animate-in">
+        <h4 style="font-size:0.95rem;margin-bottom:6px;color:var(--green-main)">كيف أبلغ عن حادث؟</h4>
+        <p style="font-size:0.85rem;color:var(--text-muted)">اذهب لصفحة البلاغات، اضغط على زر (+)، واملأ نموذج البلاغ مع تحديد الموقع ونوع المشكلة.</p>
       </div>
 
-      <div class="status-card closed animate-in" onclick="window.location='roads.html'">
-        <div class="sc-icon">🚫</div>
-        <div class="sc-num" data-count="6">0</div>
-        <div class="sc-label">طريق مغلق</div>
-        <div class="sc-sub">أعمال صيانة وإنشاء</div>
+      <div class="card animate-in">
+        <h4 style="font-size:0.95rem;margin-bottom:6px;color:var(--green-main)">هل المعلومات محدّثة لحظياً؟</h4>
+        <p style="font-size:0.85rem;color:var(--text-muted)">نعم، يتم تحديث حالة الطرق كل 5 دقائق بناءً على بلاغات المستخدمين ومصادر البيانات المتعددة.</p>
+      </div>
+
+      <div class="card animate-in">
+        <h4 style="font-size:0.95rem;margin-bottom:6px;color:var(--green-main)">هل الخدمة مجانية؟</h4>
+        <p style="font-size:0.85rem;color:var(--text-muted)">نعم، خدمة SafeRoad Libya مجانية بالكامل لجميع المستخدمين. نهدف لتحسين سلامة الطرق للجميع.</p>
+      </div>
+
+      <div class="card animate-in">
+        <h4 style="font-size:0.95rem;margin-bottom:6px;color:var(--green-main)">كيف أشترك في الإشعارات؟</h4>
+        <p style="font-size:0.85rem;color:var(--text-muted)">سجّل دخولك في المنصة وفعّل الإشعارات من إعدادات حسابك لتلقي تنبيهات فورية عن طرقك المفضلة.</p>
       </div>
 
     </div>
   </section>
 
-  <!-- ===== FEATURED ROADS ===== -->
-  <section class="roads-section">
-    <div class="section-label">🛣 الطرق الرئيسية</div>
-    <div class="section-title">أبرز <span>المحاور المرورية</span></div>
-    <p class="section-desc">حالة الطرق الرئيسية المحدَّثة في الوقت الفعلي</p>
-
-    <div class="roads-list">
-
-      <div class="road-item animate-in">
-        <div class="road-num">T1</div>
-        <div class="road-info">
-          <div class="road-name">الطريق الساحلي الغربي</div>
-          <div class="road-cities">طرابلس ← الزاوية ← صبراتة ← زوارة</div>
-        </div>
-        <div class="road-meta">
-          <span class="road-dist">📏 140 كم</span>
-          <span class="road-time">⏱ 1.5 ساعة</span>
-          <span class="badge badge-safe"><span class="status-dot safe"></span> آمن</span>
-        </div>
-      </div>
-
-      <div class="road-item animate-in">
-        <div class="road-num">T2</div>
-        <div class="road-info">
-          <div class="road-name">الطريق الساحلي الشرقي</div>
-          <div class="road-cities">طرابلس ← مصراتة ← سرت ← بنغازي</div>
-        </div>
-        <div class="road-meta">
-          <span class="road-dist">📏 1050 كم</span>
-          <span class="road-time">⏱ 11 ساعة</span>
-          <span class="badge badge-warning"><span class="status-dot warning"></span> ازدحام</span>
-        </div>
-      </div>
-
-      <div class="road-item animate-in">
-        <div class="road-num">B1</div>
-        <div class="road-info">
-          <div class="road-name">طريق بنغازي – البيضاء</div>
-          <div class="road-cities">بنغازي ← المرج ← البيضاء ← شحات</div>
-        </div>
-        <div class="road-meta">
-          <span class="road-dist">📏 220 كم</span>
-          <span class="road-time">⏱ 2.5 ساعة</span>
-          <span class="badge badge-danger"><span class="status-dot danger"></span> حادث</span>
-        </div>
-      </div>
-
-      <div class="road-item animate-in">
-        <div class="road-num">S1</div>
-        <div class="road-info">
-          <div class="road-name">طريق طرابلس – غريان</div>
-          <div class="road-cities">طرابلس ← ترهونة ← بني وليد ← غريان</div>
-        </div>
-        <div class="road-meta">
-          <span class="road-dist">📏 165 كم</span>
-          <span class="road-time">⏱ 2 ساعة</span>
-          <span class="badge badge-safe"><span class="status-dot safe"></span> آمن</span>
-        </div>
-      </div>
-
-      <div class="road-item animate-in">
-        <div class="road-num">D1</div>
-        <div class="road-info">
-          <div class="road-name">الطريق الصحراوي</div>
-          <div class="road-cities">طرابلس ← غريان ← سبها ← الكفرة</div>
-        </div>
-        <div class="road-meta">
-          <span class="road-dist">📏 1800 كم</span>
-          <span class="road-time">⏱ 2 يوم</span>
-          <span class="badge badge-closed"><span class="status-dot closed"></span> مغلق جزئياً</span>
-        </div>
-      </div>
-
-    </div>
-
-    <div style="margin-top:1.5rem;text-align:center">
-      <a href="roads.html" class="btn-secondary">عرض جميع الطرق ←</a>
-    </div>
-  </section>
-
-  <!-- ===== STATS ===== -->
-  <section class="stats-section">
-    <div class="section-label text-center" style="margin:0 auto 1.5rem">📈 إحصائياتنا</div>
-    <div class="section-title text-center">أرقام <span>تتحدث عن نفسها</span></div>
-
-    <div class="stats-grid" style="margin-top:2.5rem">
-      <div class="stat-item animate-in">
-        <span class="num" data-count="48">0</span>
-        <div class="label">طريق مراقَب</div>
-      </div>
-      <div class="stat-item animate-in">
-        <span class="num" data-count="1240">0</span>
-        <div class="label">مستخدم نشط</div>
-      </div>
-      <div class="stat-item animate-in">
-        <span class="num" data-count="320">0</span>
-        <div class="label">بلاغ هذا الشهر</div>
-      </div>
-      <div class="stat-item animate-in">
-        <span class="num" data-count="98">0</span><span class="unit" style="color:var(--green-main)">%</span>
-        <div class="label">دقة المعلومات</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== HOW IT WORKS ===== -->
-  <section class="section">
-    <div class="section-label">⚙️ كيف يعمل</div>
-    <div class="section-title">بسيط وسريع <span>وموثوق</span></div>
-
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2rem">
-
-      <div class="card animate-in" style="text-align:center;padding:2rem">
-        <div style="font-size:2.5rem;margin-bottom:1rem">🔍</div>
-        <h3 style="margin-bottom:0.5rem;font-size:1.05rem">1. ابحث عن طريقك</h3>
-        <p style="color:var(--text-muted);font-size:0.88rem">أدخل مدينة الانطلاق والوجهة وابحث</p>
-      </div>
-
-      <div class="card animate-in" style="text-align:center;padding:2rem">
-        <div style="font-size:2.5rem;margin-bottom:1rem">📊</div>
-        <h3 style="margin-bottom:0.5rem;font-size:1.05rem">2. اطلع على الحالة</h3>
-        <p style="color:var(--text-muted);font-size:0.88rem">احصل على معلومات لحظية عن الطريق</p>
-      </div>
-
-      <div class="card animate-in" style="text-align:center;padding:2rem">
-        <div style="font-size:2.5rem;margin-bottom:1rem">🛡</div>
-        <h3 style="margin-bottom:0.5rem;font-size:1.05rem">3. سافر بأمان</h3>
-        <p style="color:var(--text-muted);font-size:0.88rem">اتخذ قرارك بثقة وسافر بأمان تام</p>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ===== FOOTER ===== -->
+  <!-- FOOTER -->
   <footer class="footer">
     <div class="footer-grid">
       <div class="footer-brand">
-        <div class="nav-logo">
-          <div class="logo-icon">🛣</div>
-          Safe<span>Road</span> Libya
-        </div>
+        <div class="nav-logo"><div class="logo-icon">🛣</div>Safe<span>Road</span> Libya</div>
         <p>منصة ذكية لمراقبة الطرق وحالة المرور في ليبيا. نساعدك على السفر بأمان وثقة.</p>
         <div class="social-links" style="margin-top:1rem">
           <a href="#" class="social-link">𝕏</a>
@@ -1809,38 +1690,25 @@ textarea.form-control { resize: vertical; min-height: 120px; }
           <a href="#" class="social-link">📧</a>
         </div>
       </div>
-
-      <div class="footer-col">
-        <h4>الصفحات</h4>
-        <ul>
-          <li><a href="index.html">الرئيسية</a></li>
-          <li><a href="roads.html">الطرق</a></li>
-          <li><a href="reports.html">البلاغات</a></li>
-          <li><a href="dashboard.html">لوحة التحكم</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-col">
-        <h4>خدماتنا</h4>
-        <ul>
-          <li><a href="#">مراقبة الطرق</a></li>
-          <li><a href="#">الإشعارات الفورية</a></li>
-          <li><a href="#">تقارير الحوادث</a></li>
-          <li><a href="#">API للمطورين</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-col">
-        <h4>الدعم</h4>
-        <ul>
-          <li><a href="contact.html">تواصل معنا</a></li>
-          <li><a href="#">الأسئلة الشائعة</a></li>
-          <li><a href="#">سياسة الخصوصية</a></li>
-          <li><a href="#">الشروط والأحكام</a></li>
-        </ul>
-      </div>
+      <div class="footer-col"><h4>الصفحات</h4><ul>
+        <li><a href="index.html">الرئيسية</a></li>
+        <li><a href="roads.html">الطرق</a></li>
+        <li><a href="reports.html">البلاغات</a></li>
+        <li><a href="dashboard.html">لوحة التحكم</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>خدماتنا</h4><ul>
+        <li><a href="#">مراقبة الطرق</a></li>
+        <li><a href="#">الإشعارات الفورية</a></li>
+        <li><a href="#">تقارير الحوادث</a></li>
+        <li><a href="#">API للمطورين</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>الدعم</h4><ul>
+        <li><a href="contact.html">تواصل معنا</a></li>
+        <li><a href="#">الأسئلة الشائعة</a></li>
+        <li><a href="#">سياسة الخصوصية</a></li>
+        <li><a href="#">الشروط والأحكام</a></li>
+      </ul></div>
     </div>
-
     <div class="footer-bottom">
       <span>© 2025 <span>SafeRoad Libya</span> – جميع الحقوق محفوظة</span>
       <span>صُنع بـ ❤️ في ليبيا</span>
@@ -2298,5 +2166,12 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 </script>
+  <style>
+    @media (max-width: 640px) {
+      .contact-form-wrap > form > div:first-child {
+        grid-template-columns: 1fr !important;
+      }
+    }
+  </style>
 </body>
 </html>
