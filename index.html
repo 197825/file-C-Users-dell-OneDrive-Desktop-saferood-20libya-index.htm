@@ -2214,24 +2214,7 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ==========================================
      نموذج تسجيل الدخول
      ========================================== */
-  const loginForm = document.querySelector('.login-form');
-  if (loginForm) {
-    loginForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const btn = loginForm.querySelector('button[type="submit"]');
-      btn.disabled = true;
-      btn.textContent = '⏳ جاري التحقق...';
-
-      setTimeout(() => {
-        btn.disabled = false;
-        btn.textContent = 'تسجيل الدخول';
-        showToast('✅ تم تسجيل الدخول بنجاح!', 'success');
-
-        setTimeout(() => {
-          window.location.href = 'index.html';
-        }, 1000);
-      }, 1500);
-    });
+ 
 
     // إظهار/إخفاء كلمة المرور
     const togglePwd = document.querySelector('.input-toggle');
